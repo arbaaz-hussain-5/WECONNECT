@@ -29,25 +29,23 @@ function ContactBar({
       <div className="contact_bar">
         <div className="genre">
           <span>People</span>
-          <span>
-            Group
-          </span>
+          <span>Group</span>
         </div>
-
-        {online_users.map((o_user, index) => {
+        {Object.keys(online_users).map((o_user, index) => {
           return (
-
+            
             <Contact
+              key={o_user}
               history={history}
               set_Receiver_id={set_Receiver_id}
               r_id={o_user}
               current_receiver={receiver_id}
-              key={index}
               current_user={current_user}
               conl_user={conl_user}
               setRe_id={setSerCon}
               setSearch_data={setSearch_data}
               setSerCon={setSerCon}
+              pic={online_users[o_user]}
             />
           );
         })}
@@ -65,6 +63,7 @@ function Contact({
   set_Receiver_id,
   current_receiver,
   conl_user,
+  pic
 }) {
   const [re_id, setRe_id] = useState(r_id);
   return (
@@ -78,7 +77,7 @@ function Contact({
         setSearch_data("");
       }}
     >
-      <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" />
+      <img src={pic} />
       <span>
         {current_user !== re_id ? re_id : "you"} <br />
         <span className="is_online">

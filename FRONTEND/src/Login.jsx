@@ -6,7 +6,7 @@ import { isUser } from "./isUser";
 function Login() {
   const [user_id, setUser_id] = useState(null);
   const [password, setPassword] = useState(null);
-  const ku = useContext(isUser)
+  const ku = useContext(isUser);
   const navigate = useNavigate();
   return (
     <div className="login">
@@ -15,9 +15,7 @@ function Login() {
         <input
           onChange={(event) => {
             setUser_id(event.target.value);
-          }
-        
-        }
+          }}
         />
         <br />
         <h4>PASSWORD</h4>
@@ -38,32 +36,38 @@ function Login() {
               body: JSON.stringify({ user_id: user_id, password: password }),
             })
               .then((response) => {
-                console.log(response)
-                return response.json()})
+                console.log(response);
+                return response.json();
+              })
               .then((data) => {
                 k = data.token;
-                console.log(k)
-              
+                console.log(k);
               });
             if (k !== "wrong password" && k !== "user not found") {
-              ku.auth = true
-              ku.user = user_id
-              ku.auth_token = k
-              console.log(ku)
-              sessionStorage.setItem('current_user', user_id);
+              ku.auth = true;
+              ku.user = user_id;
+              ku.auth_token = k;
+              console.log(ku);
+              sessionStorage.setItem("current_user", user_id);
+              sessionStorage.setItem("current_cdi", []);
               console.log("local storage");
-              console.log(sessionStorage)
-              console.log(sessionStorage.getItem('current_user'));
-               console.log(sessionStorage.getItem('current_use'));
+              console.log(sessionStorage);
+              console.log(sessionStorage.getItem("current_user"));
+              console.log(sessionStorage.getItem("current_use"));
               navigate("/");
             }
           }}
         >
           LOGIN
         </button>
-        <span className="new_sign" onClick={() => {
-           navigate("/signup");
-        }}>new user?signup hear</span>
+        <span
+          className="new_sign"
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          new user?signup hear
+        </span>
       </div>
     </div>
   );

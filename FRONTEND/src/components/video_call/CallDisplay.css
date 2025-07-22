@@ -1,0 +1,32 @@
+.call_display{
+    width:30vw;
+    height:20vh;
+    background-color: black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.call_accept{
+    width: 5vw;
+    height: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    border-radius: 2vw;
+    
+}
+.call_reject{
+    width: 5vw;
+    height: 5vw;
+    background-color: red;
+      display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2vw;
+}
+
+.call_display svg {
+    height: 3vw;
+    width: 3vw;
+}

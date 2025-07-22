@@ -15,8 +15,8 @@ export default async function login(req, res) {
         const token = jwt.sign(req.body.user_id, "CHATAPP");
         res.cookie("ChatToken", token, {
           httpOnly: true,
-          secure: true, 
-          sameSite: "Strict",
+          secure: true,
+          sameSite: "Lax",
         });
         res.json({ token: token });
       } else {

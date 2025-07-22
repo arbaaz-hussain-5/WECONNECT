@@ -10,7 +10,7 @@ export default async function search(req, res) {
   const reg = req.body.reg;
   let regex = new RegExp("^" + reg, "i");
   users
-    .find({ user_id: regex })
+    .find({ user_id: regex },{ projection: { user_id: 1, profile_pic: 1 } })
     .toArray()
     .then((data) => {
       res.send(data);

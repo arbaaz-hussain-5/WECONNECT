@@ -40,7 +40,7 @@ h6 {
 }
 
 .nav_bar {
-    height: 12vh;
+    height: 5vw;
     width: 100vw;
     background-color: #838996;
 
@@ -64,13 +64,14 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 
 
 .ham_menu>svg {
-    height: 7vh;
-    width: 7vh;
+    height: 3vw;
+    width: 3vw;
 }
 
 
@@ -88,9 +89,9 @@ h6 {
 }
 
 .logo>svg {
-    height: 9vh;
-    width: 9vh;
-    border-radius: 10vh;
+    height: 4.5vw;
+    width:4.5vw;
+    border-radius: 4.5vw;
 }
 
 .logo span {
@@ -107,8 +108,8 @@ h6 {
 
 .notfication_bell svg {
 
-    width: 6vh;
-    height: 6vh;
+       height: 3vw;
+    width: 3vw;
     background-color: black;
     fill: red;
     padding: 4px;
@@ -117,8 +118,8 @@ h6 {
 
 .not_notfication_bell svg {
 
-    width: 6vh;
-    height: 6vh;
+     height: 3vw;
+    width: 3vw;
     background-color: black;
     fill: white;
     padding: 4px;
@@ -127,28 +128,28 @@ h6 {
 
 
 .notfication_bell {
-    width: 6vh;
-    height: 6vh;
+      height: 3vw;
+    width: 3vw;
     cursor: pointer;
     position: relative;
 }
 
 .not_notfication_bell {
-    width: 6vh;
-    height: 6vh;
+      height: 3vw;
+    width: 3vw;
     cursor: pointer;
     position: relative;
 }
 
 .account {
-    width: 6vh;
-    height: 6vh;
+     height: 3vw;
+    width: 3vw;
     cursor: pointer;
 }
 
 .account svg {
-    width: 6vh;
-    height: 6vh;
+     height: 3vw;
+    width: 3vw;;
     background-color: black;
      fill: white;
     padding: 4px;
@@ -156,14 +157,14 @@ h6 {
 }
 
 .Chat_Message {
-    width: 6vh;
-    height: 6vh;
+      height: 3vw;
+    width: 3vw;;
     cursor: pointer;
 }
 
 .Chat_Message svg {
-    width: 6vh;
-    height: 6vh;
+       height: 3vw;
+    width: 3vw;
     background-color: black;
      fill: white;
     padding: 4px;
@@ -187,15 +188,15 @@ h6 {
 }
 
 .ham_menu_side>svg {
-    height: 7vh;
-    width: 7vh;
+    height: 3vw;
+    width: 3vw;
     background-color: #838996;
     margin-left: 0.5rem;
     border-radius: 7px;
 }
 
 .side_top {
-    height: 12vh;
+    height: 5vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -217,6 +218,7 @@ h6 {
     color: white;
     background-color: #838996;
     padding: 4px;
+    cursor: pointer;
 
 
 }
@@ -236,9 +238,9 @@ h6 {
 }
 
 .side_logo>svg {
-    height: 9vh;
-    width: 9vh;
-    border-radius: 10vh;
+    height: 4.5vw;
+    width: 4.5vw;
+    border-radius: 4.5vw;
 }
 
 .side_logo span {

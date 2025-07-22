@@ -20,6 +20,7 @@ function SearchContact({ search_data, current_user }) {
       .then((response) => response.json())
       .then((data) => {
         setDaser(data);
+        console.log(data)
       });
   }, [search_data, token, current_user]);
 
@@ -29,13 +30,13 @@ function SearchContact({ search_data, current_user }) {
           <span>People</span>
         </div>
       {daser.map((cont) => {
-        return <SearchCon name={cont.user_id} />;
+        return <SearchCon name={cont.user_id} pic = {cont.profile_pic} />;
       })}
     </div>
   );
 }
 
-function SearchCon({ name }) {
+function SearchCon({ name, pic}) {
   const navigate = useNavigate();
   return (
     <div
@@ -44,7 +45,7 @@ function SearchCon({ name }) {
         navigate("/profile/" + name);
       }}
     >
-      <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" />
+      <img src={pic} />
       <span>{name}</span>
     </div>
   );

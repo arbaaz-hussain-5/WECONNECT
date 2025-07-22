@@ -3,10 +3,12 @@ import { connectBase } from "../../database/get_database.js";
 export default function socketServer(server) {
   const io_server = new Server(server, {
     cors: {
-      origin: "*",
-      methods: "*",
+      origin: process.env.CLIENT,
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+      credentials: true,
     },
   });
+
   const online_users = new Map();
   io_server.on("connection", async (user_socket) => {
     const data_base = connectBase();
@@ -65,5 +67,17 @@ export default function socketServer(server) {
         online_users.get(reciever_id).emit("recieve_message", message, user_id);
       }
     });
+    user_socket.on("send_message_rtc", (message, receiver) => {
+      console.log(online_users.keys())
+      console.log(user_id + " wants to video call " + receiver)
+      if (online_users.has(receiver)) {
+        online_users.get(receiver).emit("receive_message_rtc", message, user_id)
+        if(message.offer){
+          console.log(message.offer)
+        }
+      }
+    })
+
+
   });
 }

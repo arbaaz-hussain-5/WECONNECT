@@ -9,7 +9,7 @@ export default async function getProfile(req, res) {
   const id = req.body.p_id;
   const data = await users.findOne(
     { user_id: id },
-    { projection: { user_id: 1 } }
+    { projection: { user_id: 1, profile_pic: 1 } }
   );
-  res.send(data);
+  res.status(200).send(data);
 }

@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
 import express from "express";
+import { upload } from "./route_functions/upload_profile.js";
 import cors from "cors";
 import verifyToken from "../authentication/auth.js";
 import cookieParser from "cookie-parser";
@@ -15,6 +16,8 @@ import addFreind from "./route_functions/add_freind.js";
 import removeFreind from "./route_functions/remove_freind.js";
 import socketServer from "./socket_server/socket_server.js";
 import isNotification from "./route_functions/get_is_notification.js";
+import uploadToServer from "./route_functions/upload_to_server.js";
+import getProfilePic from "./route_functions/get_profile_pic.js";
 
 export default function runServer() {
   const app = express();
@@ -23,15 +26,18 @@ export default function runServer() {
 
   app.use(
     cors({
-      origin: "*",
+      origin: process.env.CLIENT,
       credentials: true,
     })
   );
+
   app.use(express.json());
   app.use(cookieParser());
   app.post("/signup", signUp);
   app.post("/login", login);
+
   app.use(verifyToken);
+  app.post("/uploadsingle", upload.single("file"), uploadToServer);
   app.post("/getfreinds", getFreinds);
   app.post("/search", search);
   app.post("/freind_request", freindRequest);
@@ -40,11 +46,11 @@ export default function runServer() {
   app.post("/get_profile", getProfile);
   app.post("/addfreind", addFreind);
   app.post("/removefreind", removeFreind);
-   app.post("/notfication_status", isNotification);
+  app.post("/notfication_status", isNotification);
+  app.post("/get_profile_pic", getProfilePic);
 
+  socketServer(server);
 
-  socketServer(server)
-  
   server.listen(port, () => {
     console.log(`server app listening on port ${port}`);
   });

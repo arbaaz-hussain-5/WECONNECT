@@ -50,6 +50,7 @@ function SignUp() {
                  setConfirm_Password("");
                  setPassword("");
                  setUser_id("");
+                     navigate("/");
               }
                else if (k == "exist") {
                 alert("user already exist");

@@ -29,12 +29,46 @@ h6 {
   letter-spacing: 0.5px;
 }
 
-
-.chat_board {
+.video_call {
+  width: 75vw;
+  height: 100vh;
+  background-color: rgb(62, 142, 97);
   display: flex;
+  align-items: center;
+}
+
+
+.receiver {
+  width: 50%;
+  height: 100%;
+  background-color: cadetblue;
+    display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
-.call_dispalyer {
-  position: absolute;
+.receiver > video {
+  width: 95%;
+  height: 95%;
+ 
+}
+.receiver > button {
+position: absolute;
+ 
+}
+.sender > video {
+  width: 95%;
+  height: 95%;
+ 
+}
+
+.sender {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(204, 239, 124);
+      display: flex;
+  align-items: center;
+  justify-content: center;
+
 }

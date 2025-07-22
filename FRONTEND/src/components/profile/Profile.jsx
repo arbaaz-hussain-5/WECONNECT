@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -7,6 +8,7 @@ function Profile() {
   const [pdata, setPdata] = useState(null);
   const [isFrd, setIsfrd] = useState(false);
   const [isReq, setIsReq] = useState(false);
+  const navigate = useNavigate();
   const id = useParams().id;
   const cu = useContext(isUser);
   let user = sessionStorage.getItem("current_user");
@@ -26,9 +28,10 @@ function Profile() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setPdata(data);
       });
-  }, [id, token,user]);
+  }, [id, token, user]);
 
   useEffect(() => {
     fetch("/api/getfreinds", {
@@ -44,7 +47,7 @@ function Profile() {
       .then((data) => {
         console.log("frdssss");
         console.log(data);
-        if (data.includes(id)) {
+        if (Object.keys(data).includes(id)) {
           setIsfrd(true);
           console.log("this is frd");
         } else {
@@ -123,48 +126,57 @@ function Profile() {
   return (
     <div className="profile">
       <div className="photo">
-        <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" />
-        <div className="request">
-          {!isFrd ? (
+        <img src={pdata?.profile_pic} />
+        {user == id ? (
+          <div className="change_profile" >
             <div>
-              {isReq ? (
+              <button onClick = {() => {
+                navigate("/profileupload");
+              }}>CHANGE PROFILE PIC</button>
+            </div>
+          </div>
+        ) : (
+          <div className="request">
+            {!isFrd ? (
+              <div>
+                {isReq ? (
+                  <button
+                    onClick={() => {
+                      withDrawRequest();
+                      setIsReq(false);
+                      console.log("isreeeeeeeeeeeeeeeeeeeeeeeeeee" + isReq);
+                    }}
+                  >
+                    withDraw
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      sendRequest();
+                      setIsReq(true);
+                    }}
+                  >
+                    send Request
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div>
                 <button
                   onClick={() => {
-                    withDrawRequest();
-                    setIsReq(false);
-                    console.log("isreeeeeeeeeeeeeeeeeeeeeeeeeee" + isReq);
+                    makeUnFreind();
+                    setIsfrd(false);
                   }}
                 >
-                  withDraw
+                  UNFREIND
                 </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    sendRequest();
-                    setIsReq(true);
-                  }}
-                >
-                  send Request
-                </button>
-              )}
-            </div>
-          ) : (
-            <div>
-              <button
-                onClick={() => {
-                  makeUnFreind();
-                   setIsfrd(false)
-                }}
-              >
-                UNFREIND
-              </button>
-            </div>
-          )}
-        </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div className="about">
         <div className="aname">{pdata?.user_id}</div>
-        <div className="aid">{pdata?._id}</div>
         <div className="aabout">{"this is indiaihudus"}</div>
       </div>
     </div>

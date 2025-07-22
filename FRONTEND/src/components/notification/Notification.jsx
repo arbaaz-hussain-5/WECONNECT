@@ -80,8 +80,25 @@ function Notification() {
 
 function NotElementArr({ id, name, setDre }) {
   const [decision, setDecision] = useState(false);
+  const [pic, setPic] = useState(null);
   const cu = useContext(isUser);
   const token = cu.auth_token;
+  useEffect(() => {
+    fetch("/api/get_profile_pic", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ user_id: id, pic_id: name }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        setPic(data);
+      });
+  }, [id, token, name]);
+
   function addFrd() {
     fetch("/api/addfreind", {
       method: "POST",
@@ -119,7 +136,7 @@ function NotElementArr({ id, name, setDre }) {
     return (
       <div className="NotElement">
         <div>
-          <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" />
+          <img src={pic} />
           <span>{name}</span>
         </div>
 
@@ -127,8 +144,8 @@ function NotElementArr({ id, name, setDre }) {
           <button
             onClick={() => {
               addFrd();
-               setDecision(true);
-               alert("added to freinds")
+              setDecision(true);
+              alert("added to freinds");
             }}
           >
             Accept
@@ -136,7 +153,7 @@ function NotElementArr({ id, name, setDre }) {
           <button
             onClick={() => {
               rejectRequest();
-               setDecision(true);
+              setDecision(true);
             }}
           >
             Reject
@@ -144,9 +161,8 @@ function NotElementArr({ id, name, setDre }) {
         </div>
       </div>
     );
-  }
-  else{
-    return null
+  } else {
+    return null;
   }
 }
 
@@ -154,6 +170,23 @@ function NotElementDis({ id, name, setDre }) {
   const [decision, setDecision] = useState(false);
   const cu = useContext(isUser);
   const token = cu.auth_token;
+  const [pic, setPic] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/get_profile_pic", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ user_id: id, pic_id: name }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        setPic(data);
+      });
+  }, [id, token, name]);
   function withDrawRequest() {
     fetch("/api/remove_freind_request", {
       method: "POST",
@@ -174,7 +207,7 @@ function NotElementDis({ id, name, setDre }) {
     return (
       <div className="NotElement">
         <div>
-          <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" />
+          <img src={pic?pic:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"} />
           <span>{name}</span>
         </div>
 
