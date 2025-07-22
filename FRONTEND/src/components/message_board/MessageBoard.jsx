@@ -1,5 +1,5 @@
 import "./MessageBoard.css";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { makeCall } from "../video_call/rtc_client.js";
 import { isUser } from "../../isUser";
@@ -14,10 +14,25 @@ function MessageBoard({
 }) {
   const [open_call_window, setOpen_call_window] = useState(false);
   const [current_message, setCurrent_message] = useState("");
+  const [pic, setPic] = useState(null)
   // const [video_lisner, setVideo_lisner] = useState(null)
-const video_po = useContext(isVideo)
+  const video_po = useContext(isVideo);
   let user = sessionStorage.getItem("current_user");
   const cu = useContext(isUser);
+  useEffect(() => {
+        fetch("/api/get_profile_pic", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_id: user, pic_id: receiver_id }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        setPic(data);
+      });
+  },[user, receiver_id])
   if (user == null) {
     user = cu.user;
   }
@@ -64,18 +79,16 @@ const video_po = useContext(isVideo)
     <div className="message_board">
       <div className="chat_not_bar">
         <div className="tpro">
-          <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" />
+          <img src={pic} />
           <span>{receiver_id}</span>
         </div>
         <div className="call">
           <div
             className="videocall"
             onClick={() => {
-        
               setOpen_call_window(true);
-              
-              makeCall( video_po, socket, receiver_id);
-             ;
+
+              makeCall(video_po, socket, receiver_id);
             }}
           >
             <svg
