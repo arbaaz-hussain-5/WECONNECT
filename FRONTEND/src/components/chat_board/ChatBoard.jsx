@@ -4,8 +4,8 @@ import { io } from "socket.io-client";
 import "./ChatBoard.css";
 import ContactBar from "../contact_bar/ContactBar";
 import SearchContact from "../search_contact/SearchContact";
-import { isUser } from "../../isUser";
-import CallDisplay from "../video_call/callDisplay";
+import { isUser } from "../../isUser.jsx";
+import CallDisplay from "../video_call/callDisplay.jsx";
 function ChatBoard({ current_user }) {
   const [send_message, setSendMessage] = useState(null);
   const [receiver_id, set_Receiver_id] = useState(null);

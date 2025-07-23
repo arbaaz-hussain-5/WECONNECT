@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+
 import './App.css'
 import Lander from "./components/Landing_page/Lander";
 import NavBar from "./components/navigation_bar/NavBar";
