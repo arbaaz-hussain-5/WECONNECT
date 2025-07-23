@@ -2,8 +2,7 @@ import "./CallDisplay.css";
 import { receiveCall } from "./rtc_client";
 import { useContext } from "react";
 import { isVideo } from "../../VideoPlayer";
-import { use } from "react";
-function CallDisplay({
+export default function CallDisplay({
   setOpen_receive_window,
   set_Receiver_id,
   setIs_calling,
@@ -20,7 +19,7 @@ function CallDisplay({
         onClick={() => {
           set_Receiver_id(current_caller);
           setOpen_receive_window(true)
-          receiveCall(video_ro, socket, message, ice_list, current_caller);
+          receiveCall(video_ro,socket, message, ice_list, current_caller);
           setIs_calling(false);
         }}
       >
@@ -54,4 +53,4 @@ function CallDisplay({
   );
 }
 
-export default CallDisplay;
+

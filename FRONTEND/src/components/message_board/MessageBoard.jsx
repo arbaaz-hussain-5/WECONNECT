@@ -5,6 +5,7 @@ import { makeCall } from "../video_call/rtc_client.js";
 import { isUser } from "../../isUser";
 import VideoCall from "../video_call/VideoCall.jsx";
 import { isVideo } from "../../VideoPlayer.jsx";
+
 function MessageBoard({
   open_call_window,
   setOpen_call_window,
