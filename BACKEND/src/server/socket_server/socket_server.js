@@ -11,7 +11,7 @@ export default function socketServer(server) {
 
   const online_users = new Map();
   io_server.on("connection", async (user_socket) => {
-    const data_base = connectBase();
+    const data_base = (connectBase()).db("CHAT-BASE");
     const users = data_base.collection("users");
     const user_id = user_socket.handshake.headers.user_id;
     online_users.set(user_id, user_socket);

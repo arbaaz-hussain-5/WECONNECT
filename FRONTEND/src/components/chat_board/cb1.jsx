@@ -18,12 +18,10 @@ function ChatBoard({ current_user }) {
   const [search_data, setSearch_data] = useState("");
   const [conl_user, setConl_user] = useState([]);
   const [is_calling, setIs_calling] = useState(false);
-  const [open_receive_window, setOpen_receive_window] = useState(false);
-  const [open_call_window, setOpen_call_window] = useState(false);
   const online_freinds = useRef([]);
-  const currernt_ice = useRef([]);
-  const currernt_offer = useRef(null);
-  const currernt_caller = useRef(null);
+  const currernt_ice = useRef([])
+  const currernt_offer = useRef(null)
+
 
   const ku = useContext(isUser);
   useEffect(() => {
@@ -32,7 +30,6 @@ function ChatBoard({ current_user }) {
         user_id: current_user,
       },
     });
-    user_socket.current = socket;
     socket.on("recieve_message", (message, sender_id) => {
       user_history.current.push([message, "incomming", sender_id]);
       console.log(message);
@@ -48,15 +45,14 @@ function ChatBoard({ current_user }) {
 
     socket.on("receive_message_rtc", (message, sender_id) => {
       if (message.offer) {
-        currernt_caller.current = sender_id;
         console.log("calling");
         setIs_calling(true);
-        currernt_offer.current = message;
+        currernt_offer.current = message
       }
       if (message.icecandidate) {
-        console.log("getting cids");
-        currernt_ice.current.push(message.icecandidate);
-        console.log(currernt_ice.current);
+        console.log("getting cids")
+        currernt_ice.current.push(message.icecandidate)
+        console.log(currernt_ice.current)
       }
     });
 
@@ -88,7 +84,7 @@ function ChatBoard({ current_user }) {
     return () => {
       socket.disconnect();
     };
-  }, [current_user]);
+  }, [current_user, receiver_id]);
 
   useEffect(() => {
     fetch("/api/getfreinds", {
@@ -112,16 +108,7 @@ function ChatBoard({ current_user }) {
     <div className="chat_board">
       {is_calling ? (
         <div className="call_dispalyer">
-          <CallDisplay
-            setOpen_receive_window={setOpen_receive_window}
-            set_Receiver_id={set_Receiver_id}
-            setIs_calling={setIs_calling}
-            current_caller={currernt_caller.current}
-            socket={user_socket.current}
-            message={currernt_offer.current}
-            ice_list={currernt_ice.current}
-            
-          />
+          <CallDisplay user_id = {current_user} message_offer={currernt_offer.current} ice_list = {currernt_ice.current}  />
         </div>
       ) : null}
       {(() => {
@@ -144,8 +131,6 @@ function ChatBoard({ current_user }) {
         setSerCon={setSerCon}
         setSearch_data={setSearch_data}
         conl_user={conl_user}
-        setOpen_call_window={setOpen_call_window}
-         setOpen_receive_window={setOpen_receive_window}
       />
       <MessageBoard
         key={refresh}
@@ -153,11 +138,6 @@ function ChatBoard({ current_user }) {
         setRefresh={setRefresh}
         history={user_history}
         receiver_id={receiver_id}
-        socket={user_socket.current}
-        open_receive_window={open_receive_window}
-        open_call_window={open_call_window}
-        setOpen_call_window={setOpen_call_window}
-         setOpen_receive_window={setOpen_receive_window}
       />
     </div>
   );

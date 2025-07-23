@@ -4,26 +4,22 @@ export async function makeCall(video_po, socket, receiver) {
         return await navigator.mediaDevices.getUserMedia(constraints);
     }
     const localStream = await openMediaDevices({
-        'video': true,
-        'audio': true
+        'video': true
     });
-    console.log("got local media stream track");
+    console.log("got local mediastream object");
     console.log(localStream)
     const track = localStream.getTracks()
+    console.log("got local mediastream tracks array");
+    console.log(track)
     const configuration = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }] }
     const peerConnection = new RTCPeerConnection(configuration);
+    peerConnection.addEventListener('track', async (event) => {
+        console.log("peer added track to peerConnection Object")
+        console.log(event.streams);
+    });
     peerConnection.addEventListener('connectionstatechange', (event) => {
         if (peerConnection.connectionState === 'connected') {
             console.log("connection is estabilished")
-            
-            peerConnection.addTrack(track[0], localStream);
-            console.log("local media stream track is added")
-            video_po.current_stream = localStream
-            console.log(video_po.current_stream)
-            console.log(localStream);
-            console.log("added local media track")
-            console.log(track[1])
-
         }
     });
     peerConnection.addEventListener('icecandidate', async (event) => {
@@ -54,31 +50,42 @@ export async function makeCall(video_po, socket, receiver) {
 
     try {
         console.log("local media stream track is adder befor connection");
-        console.log(track[1]);
-        peerConnection.addTrack(track[1], localStream);
+        console.log(track[0]);
+        peerConnection.addTrack(track[0], localStream)
 
     } catch (error) {
         console.error('Error accessing media devices.', error);
     }
+    video_po.current_stream = localStream;
     const offer = await peerConnection.createOffer();
     await peerConnection.setLocalDescription(offer);
+
     socket.emit("send_message_rtc", { 'offer': offer }, receiver)
     console.log("sending offer object to remote peer")
     console.log(offer)
 }
 
-export async function receiveCall( socket, message, ice_list, sender) {
-
+export async function receiveCall(video_ro, socket, message, ice_list, sender) {
 
     const configuration = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }] }
     let peerConnection = new RTCPeerConnection(configuration);
     peerConnection.setRemoteDescription(new RTCSessionDescription(message.offer));
+
     peerConnection.addEventListener('track', async (event) => {
-        console.log("a new track is added to peerConnection Object")
+        console.log("peer added tracks to peerConnection Object")
         console.log(event.streams);
-
-
+        const track = event.streams[0].getTracks()
+        console.log("added mediastream tracks array");
+        console.log(track)
+        video_ro.current_stream = event.streams[0]
     });
+
+    peerConnection.addEventListener('connectionstatechange', async (event) => {
+        if (peerConnection.connectionState === 'connected') {
+            console.log("connection is estabilished")
+        }
+    });
+
     console.log("already received ice candidates of remote peer")
     for (const cd of ice_list) {
         try {

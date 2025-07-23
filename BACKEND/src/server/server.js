@@ -1,3 +1,4 @@
+
 import { createServer } from "node:http";
 import express from "express";
 import { upload } from "./route_functions/upload_profile.js";
@@ -18,12 +19,20 @@ import socketServer from "./socket_server/socket_server.js";
 import isNotification from "./route_functions/get_is_notification.js";
 import uploadToServer from "./route_functions/upload_to_server.js";
 import getProfilePic from "./route_functions/get_profile_pic.js";
+import { connectBase } from "../database/get_database.js";
 
-export default function runServer() {
+export default async function runServer() {
+
   const app = express();
   const server = createServer(app);
   const port = process.env.PORT;
-
+  try {
+    await connectBase().connect()
+  }
+  catch(error){
+    console.log("unable to connect to data base")
+    console.error(error)
+  }
   app.use(
     cors({
       origin: process.env.CLIENT,

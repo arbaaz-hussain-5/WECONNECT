@@ -22,7 +22,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-
+:root {
+    --blue: #34B7F1;
+    --white: #ffffff;
+    --fsize: calc(100vw/80);
+    --vgap: calc(100vw/200)
+}
 
 
 .login {
@@ -31,24 +36,27 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff6ec;
+    background-color:#eddfde;
 }
 
 .login_box {
-    height: 50vh;
-    width: 50vh;
+    height: 25vw;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color:#838996;
-    border-radius: 0px 55px 0px 55px;
+    background-color: rgb(78, 48, 48);
+    border-radius: 0px calc(var(--fsize)*5) 0px calc(var(--fsize)*5);
+    color: white;
+    font-size: var(--fsize);
+    max-height: 100vh;
 }
 
 .login_box>input {
-    margin-top: 5px;
-    width: 90%;
-    height: 10%;
+    margin-top: var(--fsize);
+    width: calc(25vw * 0.9);
+    height: calc(25vw * 0.1);
     border: none;
     cursor: pointer;
 }
@@ -56,18 +64,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .login_box>input:focus {
    outline: none;
-   border: 2px solid pink;
+   border: 2px solid#25D366;
 }
 .login_box>button{
-    margin-top: 8px;
+    margin-top:  calc(var(--fsize)*1);
     border: none;
-    width: 40%;
-    padding: 5px 10px;
+    height: calc(25vw * 0.1);
     cursor: pointer;
-    background-color: pink;
+    background-color:#25D366;
+    font-size: var(--fsize);
+    padding: 0 var(--fsize);
+    
 }
 .new_sign{
-    margin-top: 1.5px;
+    margin-top:  calc(var(--fsize) *0.75);
     color: aliceblue;
     cursor: pointer;
 }

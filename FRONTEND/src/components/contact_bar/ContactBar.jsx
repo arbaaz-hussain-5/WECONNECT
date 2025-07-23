@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./ContactBar.css";
 
 function ContactBar({
+   setOpen_receive_window,
+    setOpen_call_window,
   conl_user,
   setSearch_data,
   current_user,
@@ -35,6 +37,8 @@ function ContactBar({
           return (
             
             <Contact
+            setOpen_receive_window = {setOpen_receive_window}
+            setOpen_call_window = {setOpen_call_window}
               key={o_user}
               history={history}
               set_Receiver_id={set_Receiver_id}
@@ -55,6 +59,8 @@ function ContactBar({
 }
 
 function Contact({
+  setOpen_receive_window,
+  setOpen_call_window,
   current_user,
   history,
   setSerCon,
@@ -75,6 +81,8 @@ function Contact({
         console.log(re_id);
         setSerCon(false);
         setSearch_data("");
+        setOpen_receive_window(false);
+        setOpen_call_window(false)
       }}
     >
       <img src={pic} />

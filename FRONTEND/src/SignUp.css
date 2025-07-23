@@ -9,7 +9,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   font-family: 'Lora', serif;
   line-height: 1.5;
@@ -17,50 +18,67 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
+:root {
+  --blue: #34B7F1;
+  --white: #ffffff;
+  --fsize: calc(100vw/80);
+  --vgap: calc(100vw/200)
+}
+
 
 .signup {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff6ec;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eddfde;
 }
 
 .signup_box {
-    height: 50vh;
-    width: 50vh;
+   height: 25vw;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color:#838996;
-    border-radius: 0px 55px 0px 55px;
+    background-color: rgb(78, 48, 48);
+    border-radius: 0px calc(var(--fsize)*5) 0px calc(var(--fsize)*5);
+    color: white;
+    font-size: var(--fsize);
+    max-height: 100vh;
 }
 
 .signup_box>input {
-    margin-top: 5px;
-    width: 90%;
-    height: 10%;
+    margin-top: var(--fsize);
+    width: calc(25vw * 0.9);
+    height: calc(25vw * 0.1);
     border: none;
-     cursor: pointer;
+    cursor: pointer;
 }
 
 .signup_box>input:focus {
-   outline: none;
-   border: 2px solid pink;
+outline: none;
+   border: 2px solid#25D366;
 }
-.signup_box>button{
-    margin-top: 8px;
+
+.signup_box>button {
+   margin-top:  calc(var(--fsize)*1);
     border: none;
-    width: 40%;
-    padding: 5px 10px;
-     cursor: pointer;
-     background-color: pink;
+    height: calc(25vw * 0.1);
+    cursor: pointer;
+    background-color:#25D366;
+    font-size: var(--fsize);
+    padding: 0 var(--fsize);
 }

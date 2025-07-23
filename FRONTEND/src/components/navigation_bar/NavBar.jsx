@@ -29,9 +29,8 @@ function NavBar() {
       .then((data) => {
         if (data == "true") {
           setIsnotf(true);
-        }
-        else{
-          setIsnotf(false)
+        } else {
+          setIsnotf(false);
         }
       });
   }, [user]);
@@ -53,10 +52,10 @@ function NavBar() {
           >
             <g
               fill="none"
-              stroke="#000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="4"
+              stroke="#ffffff"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="4"
             >
               <path d="M7.94971 11.9497H39.9497" />
               <path d="M7.94971 23.9497H39.9497" />
@@ -72,8 +71,8 @@ function NavBar() {
             viewBox="0 0 128 128"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect width="128" height="128" fill="#fff6ec" />
-            <g stroke="#000" stroke-width="4" fill="none">
+            <circle cx="64" cy="64" r="64" fill=" #25D366" />
+            <g stroke="#000" strokeWidth="4" fill="none">
               <path
                 d="M20 40 h40 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-8 l-12 10 v-10 h-20 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10 z"
                 fill="#ffffff"
@@ -82,7 +81,7 @@ function NavBar() {
               <circle cx="45" cy="60" r="3" fill="#000" />
               <circle cx="55" cy="60" r="3" fill="#000" />
             </g>
-            <g stroke="#000" stroke-width="4" fill="#a0a0a0">
+            <g stroke="#000" strokeWidth="4" fill="#a0a0a0">
               <rect x="70" y="40" width="40" height="30" rx="4" ry="4" />
               <polygon
                 points="110,45 125,55 110,65"
@@ -91,23 +90,17 @@ function NavBar() {
               />
             </g>
           </svg>
-
-          <span>CHATLINE</span>
         </div>
       </div>
       <div className="right_nav">
         {!usob.auth ? (
           <>
             <div className="login_logout">
-              <NavLink to="/login">
-                <span>LOGIN</span>
-              </NavLink>
+              <NavLink to="/login">LOGIN</NavLink>
             </div>
 
             <div className="login_logout">
-              <NavLink to="/signup">
-                <span>SIGNUP</span>
-              </NavLink>
+              <NavLink to="/signup">SIGNUP</NavLink>
             </div>
           </>
         ) : (
@@ -123,7 +116,7 @@ function NavBar() {
                   setUauth(!uauth);
                 }}
               >
-                <span>LOGOUT</span>
+                LOGOUT
               </NavLink>
             </div>
 
@@ -213,8 +206,8 @@ function SideBar({ isham, setIsHam }) {
             viewBox="0 0 128 128"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect width="128" height="128" fill="#fff6ec" />
-            <g stroke="#000" stroke-width="4" fill="none">
+            <circle cx="64" cy="64" r="64" fill="#25D366" />
+            <g stroke="#000" strokeWidth="4" fill="none">
               <path
                 d="M20 40 h40 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-8 l-12 10 v-10 h-20 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10 z"
                 fill="#ffffff"
@@ -223,7 +216,7 @@ function SideBar({ isham, setIsHam }) {
               <circle cx="45" cy="60" r="3" fill="#000" />
               <circle cx="55" cy="60" r="3" fill="#000" />
             </g>
-            <g stroke="#000" stroke-width="4" fill="#a0a0a0">
+            <g stroke="#000" strokeWidth="4" fill="#a0a0a0">
               <rect x="70" y="40" width="40" height="30" rx="4" ry="4" />
               <polygon
                 points="110,45 125,55 110,65"
@@ -232,8 +225,6 @@ function SideBar({ isham, setIsHam }) {
               />
             </g>
           </svg>
-
-          <span>CHATLINE</span>
         </div>
       </div>
 

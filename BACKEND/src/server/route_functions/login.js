@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { connectBase } from "../../database/get_database.js";
 
 export default async function login(req, res) {
-  const data_base = connectBase();
+  const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
   const is_user = await users.findOne({ user_id: req.body.user_id });
   if (is_user !== null) {

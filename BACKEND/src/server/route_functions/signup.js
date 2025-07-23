@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { connectBase } from "../../database/get_database.js";
 
 export default async function signUp(req, res) {
-  const data_base = connectBase();
+  const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
   const user_id = req.body.user_id;
   const is_user = await users.findOne({ user_id: user_id });

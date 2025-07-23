@@ -27,6 +27,4 @@ h1, h2, h3, h4, h5, h6 {
 .home{
     background-color: #fff6ec;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
 }

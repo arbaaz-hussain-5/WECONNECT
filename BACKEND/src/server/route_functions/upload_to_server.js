@@ -4,7 +4,7 @@ export default async function uploadToServer(req, res) {
   //   if (req.userId !== req.tuser) {
   //     return res.status(401).send("Unauthorized: Invalid Authorization header");
   //   }
-  const data_base = connectBase();
+  const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
   
   console.log(req.file.originalname);

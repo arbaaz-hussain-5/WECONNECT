@@ -4,7 +4,7 @@ export default async function removeFreind(req, res) {
   if (req.userId !== req.body.user_1) {
     return res.status(401).send("Unauthorized: Invalid Authorization header");
   }
-  const data_base = connectBase();
+  const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
   const query_1 = { user_id: req.body.user_1 };
   const query_2 = { user_id: req.body.user_2 };

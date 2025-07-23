@@ -4,7 +4,7 @@ export default async function freindRequest(req, res) {
   if (req.userId !== req.body.r_sender) {
     return res.status(401).send("Unauthorized: Invalid Authorization header");
   }
-  const data_base = connectBase();
+  const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
   const sender = req.body.r_sender;
   const receiver = req.body.r_receiver;

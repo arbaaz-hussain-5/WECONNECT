@@ -6,13 +6,16 @@ import { isUser } from "../../isUser";
 import VideoCall from "../video_call/VideoCall.jsx";
 import { isVideo } from "../../VideoPlayer.jsx";
 function MessageBoard({
+  open_call_window,
+  setOpen_call_window,
+  open_receive_window,
   socket,
   send_message,
   setRefresh,
   history,
   receiver_id,
+
 }) {
-  const [open_call_window, setOpen_call_window] = useState(false);
   const [current_message, setCurrent_message] = useState("");
   const [pic, setPic] = useState(null)
   // const [video_lisner, setVideo_lisner] = useState(null)
@@ -36,10 +39,15 @@ function MessageBoard({
   if (user == null) {
     user = cu.user;
   }
+  
+  if (open_receive_window) {
+    return <VideoCall />;
+  }
 
   if (open_call_window) {
     return <VideoCall />;
   }
+
 
   if (!receiver_id) {
     return (
