@@ -1,32 +1,20 @@
 import "./VideoCall.css";
-import { useEffect, useRef } from "react";
-import { useContext } from "react";
-import { isVideo } from "../../VideoPlayer";
+import "video.js/dist/video-js.css";
+import { useContext, useEffect, useRef } from "react";
+import { isVideo } from "../../contexts/VideoPlayer";
 function VideoCall() {
-  const myElementRef = useRef(null);
-  const k = useContext(isVideo);
-  k.video_elm = myElementRef;
-  console.log("strmmmmmmmmmmmmmmmmm");
-  console.log(k.current_stream);
-  console.log("mmmmmmmmmmmmmmmmmmmmmmmmmm");
+  const VideoStream = useContext(isVideo);
+  const myRef_local = useRef(null);
+  const myRef_remote = useRef(null);
+  VideoStream.video_elm_remote = myRef_remote;
+  VideoStream.video_elm_local = myRef_local;
   return (
-    <div ref={myElementRef} className="video_call">
+    <div className="video_call">
       <div className="receiver">
-        <video id="hi" autoPlay playsInline controls={true}></video>
-        <button
-          onClick={() => {
-            console.log("strmmmmmmmmmmmmmmmmm");
-            console.log(k.current_stream);
-            k.video_elm.current.querySelector("#hi").srcObject =
-              k.current_stream;
-            console.log("mmmmmmmmmmmmmmmmmmmmmmmmmm");
-          }}
-        >
-          click
-        </button>
+        <video ref={myRef_remote} autoPlay playsInline controls={false}></video>
       </div>
       <div className="sender">
-        <video autoPlay playsInline controls={true}></video>
+        <video autoPlay playsInline controls={false} ref={myRef_local}></video>
       </div>
     </div>
   );

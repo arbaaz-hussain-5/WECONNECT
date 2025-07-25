@@ -15,7 +15,13 @@ export default function socketServer(server) {
     const users = data_base.collection("users");
     const user_id = user_socket.handshake.headers.user_id;
     online_users.set(user_id, user_socket);
-    const freinds = (await users.findOne({ user_id: user_id }))?.freinds;
+    let freinds;
+    try {
+      freinds = (await users.findOne({ user_id: user_id }))?.freinds;
+    }
+    catch (error) {
+      console.log("unable to connect to database", error);
+    }
     const fdata = [];
     console.log("freinds: " + freinds);
 
@@ -72,7 +78,7 @@ export default function socketServer(server) {
       console.log(user_id + " wants to video call " + receiver)
       if (online_users.has(receiver)) {
         online_users.get(receiver).emit("receive_message_rtc", message, user_id)
-        if(message.offer){
+        if (message.offer) {
           console.log(message.offer)
         }
       }

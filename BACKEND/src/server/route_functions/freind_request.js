@@ -8,7 +8,13 @@ export default async function freindRequest(req, res) {
   const users = data_base.collection("users");
   const sender = req.body.r_sender;
   const receiver = req.body.r_receiver;
-  const data1 = await users.findOne({ user_id: receiver });
+  let data1;
+  try {
+    data1 = await users.findOne({ user_id: receiver });
+  }
+  catch {
+    return res.status(503).send("unable to connect to database");
+  }
   let isExist = false;
   for (let i = 0; i < data1.freind_request.length; i++) {
     if (
@@ -20,21 +26,32 @@ export default async function freindRequest(req, res) {
     }
   }
   if (!isExist) {
-    await users.updateOne(
-      { user_id: receiver },
-      {
-        $set: {
-          freind_request: [
-            ...data1.freind_request,
-            ["arrived", sender, "pending"],
-          ],
-        },
-      }
-    );
+    try {
+      await users.updateOne(
+        { user_id: receiver },
+        {
+          $set: {
+            freind_request: [
+              ...data1.freind_request,
+              ["arrived", sender, "pending"],
+            ],
+          },
+        }
+      );
+    }
+    catch {
+      return res.status(503).send("unable to connect to database");
+    }
   }
 
   isExist = false;
-  const data2 = await users.findOne({ user_id: sender });
+  let data2;
+  try {
+    data2 = await users.findOne({ user_id: sender });
+  }
+  catch {
+    return res.status(503).send("unable to connect to database");
+  }
   for (let i = 0; i < data2.freind_request.length; i++) {
     if (
       data2.freind_request[i][1] == receiver &&
@@ -45,26 +62,36 @@ export default async function freindRequest(req, res) {
     }
   }
   if (!isExist) {
+    try {
+      await users.updateOne(
+        { user_id: sender },
+        {
+          $set: {
+            freind_request: [
+              ...data2.freind_request,
+              ["dispatch", receiver, "pending"],
+            ],
+          },
+        }
+      );
+    }
+    catch {
+      return res.status(503).send("unable to connect to database");
+    }
+  }
+  try {
     await users.updateOne(
-      { user_id: sender },
+      { user_id: receiver },
       {
         $set: {
-          freind_request: [
-            ...data2.freind_request,
-            ["dispatch", receiver, "pending"],
-          ],
+          notifications: true,
         },
       }
     );
   }
-  await users.updateOne(
-    { user_id: receiver },
-    {
-      $set: {
-        notifications: true,
-      },
-    }
-  );
+  catch {
+    return res.status(503).send("unable to connect to database");
+  }
 
-  res.send("done");
+  return res.status(200).send("freind request send");
 }

@@ -18,9 +18,9 @@ function Lander() {
           >
             <g
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeidth="4"
             >
               <path
                 fill="#2F88FF"
@@ -58,7 +58,7 @@ function Lander() {
       </div>
       <div className="m_lander">
         <img
-          src="https://static.vecteezy.com/system/resources/previews/012/697/220/non_2x/voip-or-voice-over-internet-protocol-with-telephony-scheme-technology-and-network-phone-call-software-in-template-hand-drawn-cartoon-flat-illustration-vector.jpg"
+          src="https://ik.imagekit.io/arbaazhussain/1753449456664.png?updatedAt=1753449545547"
           alt=""
         />
         <div className="li">
@@ -82,10 +82,10 @@ function Lander() {
             from your browser or app.
           </p>
         </div>
-        <img src="https://static.vecteezy.com/system/resources/previews/007/036/613/non_2x/cute-girl-video-call-on-laptop-cartoon-icon-illustration-people-technology-icon-concept-isolated-premium-flat-cartoon-style-vector.jpg" />
+        <img src="https://ik.imagekit.io/arbaazhussain/1753449158533.png?updatedAt=1753449545689" />
       </div>
       <div className="m_lander">
-        <img src="https://media.istockphoto.com/id/1160018654/vector/chat-talk-of-young-people-with-smartphones-man-and-woman-standing-near-big-mobile-phone-with.jpg?s=612x612&w=0&k=20&c=Bm_7zdvMLU6vCdlI7lpyPvkPKqxwBTkAk0qZ8Twfo3s=" />
+        <img src="https://ik.imagekit.io/arbaazhussain/1753449223762.png?updatedAt=1753449545414" />
         <div>
           {" "}
           <h2>Instant Messaging (Socket.IO)</h2>

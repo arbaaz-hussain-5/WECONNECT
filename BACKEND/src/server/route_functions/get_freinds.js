@@ -7,9 +7,15 @@ export default async function getFreinds(req, res) {
   const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
   const query = { user_id: req.body.user_id };
-  const freinds = await users.findOne(query);
-  const ids = freinds?.freinds;
+  let freinds;
+  try {
+    freinds = await users.findOne(query);
+  }
+  catch {
+    return res.status(503).send("Unable To Connect To Databas");
 
+  }
+  const ids = freinds?.freinds;
   const freind_list = new Map();
   async function getProfilePic(name) {
     const profile_pic = (await users.findOne({ user_id: name })).profile_pic;
@@ -17,10 +23,12 @@ export default async function getFreinds(req, res) {
   }
 
   for (let i = 0; i < ids.length; i++) {
-    freind_list.set(ids[i], await getProfilePic(ids[i]));
+    try {
+      freind_list.set(ids[i], await getProfilePic(ids[i]));
+    }
+    catch {
+      return res.status(503).send("Unable To Connect Database");
+    }
   }
-
-  console.log(freind_list);
-
-  res.send( Object.fromEntries(freind_list));
+  res.status(200).send(Object.fromEntries(freind_list));
 }

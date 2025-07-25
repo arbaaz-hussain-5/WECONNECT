@@ -1,13 +1,9 @@
-import React from "react";
+
 import "./ProfileUpload.css";
-import { useState, useContext } from "react";
-import { isUser } from "./isUser";
+import { useState} from "react";
 function ProfileUpload() {
-  const cu = useContext(isUser);
+ 
   let user = sessionStorage.getItem("current_user");
-  if (user == null) {
-    user = cu.user;
-  }
   const [current_file, setCurrent_file] = useState(null);
   return (
     <div className="profile_upload">
@@ -26,16 +22,20 @@ function ProfileUpload() {
 
         <button
           onClick={() => {
-            fetch("/api/uploadsingle", {
+            fetch(`/${import.meta.env.VITE_SERVER_URL}/uploadsingle`, {
               method: "POST",
               body: current_file,
-            })
-              .then((response) => {
-                return response.text();
-              })
-              .then((data) => {
-                console.log(data);
-              });
+            }).then((response) => {
+              if (response.status == 200) {
+                console.log("profile changed successfilly");
+              } else if (response.status == 401) {
+                console.log("unauthorized access");
+              } else {
+                console.log(
+                  "something went wrong while processing your request"
+                );
+              }
+            });
           }}
         >
           Upload

@@ -1,11 +1,10 @@
-import { useEffect, useState, useRef, useContext } from "react";
+import { useEffect, useState, useRef } from "react";
 import MessageBoard from "../message_board/MessageBoard";
 import { io } from "socket.io-client";
 import "./ChatBoard.css";
 import ContactBar from "../contact_bar/ContactBar";
 import SearchContact from "../search_contact/SearchContact";
-import CallDisplay from "../video_call/CallDisplay.jsx";
-import { isUser } from "../../isUser.jsx";
+import CallDisplay from "../caller_receiver/CallDisplay.jsx";
 
 function ChatBoard({ current_user }) {
   const [send_message, setSendMessage] = useState(null);
@@ -25,10 +24,8 @@ function ChatBoard({ current_user }) {
   const currernt_ice = useRef([]);
   const currernt_offer = useRef(null);
   const currernt_caller = useRef(null);
-
-  const ku = useContext(isUser);
   useEffect(() => {
-    const socket = io("http://localhost:3000/", {
+    const socket = io(import.meta.env.VITE_SOCKET_SERVER, {
       extraHeaders: {
         user_id: current_user,
       },
@@ -92,22 +89,24 @@ function ChatBoard({ current_user }) {
   }, [current_user]);
 
   useEffect(() => {
-    fetch("/api/getfreinds", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/getfreinds`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${ku.auth_token}`,
       },
       body: JSON.stringify({ user_id: current_user }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("frdzzzzzz");
-        console.log(data);
+    }).then(async (response) => {
+      if (response.status == 200) {
+        const data = await response.json();
         set_freinds(data);
-      });
-  }, [ku.auth_token, current_user]);
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
+  }, [current_user]);
 
   return (
     <div className="chat_board">
@@ -121,7 +120,6 @@ function ChatBoard({ current_user }) {
             socket={user_socket.current}
             message={currernt_offer.current}
             ice_list={currernt_ice.current}
-            
           />
         </div>
       ) : null}
@@ -146,10 +144,9 @@ function ChatBoard({ current_user }) {
         setSearch_data={setSearch_data}
         conl_user={conl_user}
         setOpen_call_window={setOpen_call_window}
-         setOpen_receive_window={setOpen_receive_window}
+        setOpen_receive_window={setOpen_receive_window}
       />
       <MessageBoard
-        key={refresh}
         send_message={send_message}
         setRefresh={setRefresh}
         history={user_history}
@@ -158,7 +155,7 @@ function ChatBoard({ current_user }) {
         open_receive_window={open_receive_window}
         open_call_window={open_call_window}
         setOpen_call_window={setOpen_call_window}
-         setOpen_receive_window={setOpen_receive_window}
+        setOpen_receive_window={setOpen_receive_window}
       />
     </div>
   );

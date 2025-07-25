@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./ContactBar.css";
 
 function ContactBar({
-   setOpen_receive_window,
-    setOpen_call_window,
+  setOpen_receive_window,
+  setOpen_call_window,
   conl_user,
   setSearch_data,
   current_user,
@@ -28,17 +28,16 @@ function ContactBar({
           }}
         />
       </div>
+      <div className="genre">
+        <span>People</span>
+        <span>Group</span>
+      </div>
       <div className="contact_bar">
-        <div className="genre">
-          <span>People</span>
-          <span>Group</span>
-        </div>
-        {Object.keys(online_users).map((o_user, index) => {
+        {Object.keys(online_users).map((o_user) => {
           return (
-            
             <Contact
-            setOpen_receive_window = {setOpen_receive_window}
-            setOpen_call_window = {setOpen_call_window}
+              setOpen_receive_window={setOpen_receive_window}
+              setOpen_call_window={setOpen_call_window}
               key={o_user}
               history={history}
               set_Receiver_id={set_Receiver_id}
@@ -62,32 +61,31 @@ function Contact({
   setOpen_receive_window,
   setOpen_call_window,
   current_user,
-  history,
   setSerCon,
   setSearch_data,
   r_id,
   set_Receiver_id,
   current_receiver,
   conl_user,
-  pic
+  pic,
 }) {
   const [re_id, setRe_id] = useState(r_id);
   return (
     <div
       className="contact"
-      style={current_receiver === re_id ? { backgroundColor: "pink" } : {}}
+      style={current_receiver === re_id ? { backgroundColor: "white" } : {}}
       onClick={() => {
         set_Receiver_id(re_id);
         console.log(re_id);
         setSerCon(false);
         setSearch_data("");
         setOpen_receive_window(false);
-        setOpen_call_window(false)
+        setOpen_call_window(false);
       }}
     >
       <img src={pic} />
-      <span>
-        {current_user !== re_id ? re_id : "you"} <br />
+      <span style={current_receiver === re_id ? { color: "black" } : {}}>
+        {current_user !== re_id ? re_id : "you"}
         <span className="is_online">
           {conl_user.includes(re_id) ? "online" : null}
         </span>

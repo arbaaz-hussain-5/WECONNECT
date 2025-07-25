@@ -1,7 +1,7 @@
 import "./CallDisplay.css";
-import { receiveCall } from "./rtc_client";
+import { receiveCall } from "../../utils/web_rtc/web_rtc_server";
 import { useContext } from "react";
-import { isVideo } from "../../VideoPlayer";
+import { isVideo } from "../../contexts/VideoPlayer";
 export default function CallDisplay({
   setOpen_receive_window,
   set_Receiver_id,
@@ -11,7 +11,7 @@ export default function CallDisplay({
   message,
   ice_list,
 }) {
-  const video_ro = useContext(isVideo);
+  const VideoStream = useContext(isVideo);
   return (
     <div className="call_display">
       <div
@@ -19,7 +19,7 @@ export default function CallDisplay({
         onClick={() => {
           set_Receiver_id(current_caller);
           setOpen_receive_window(true)
-          receiveCall(video_ro,socket, message, ice_list, current_caller);
+          receiveCall(VideoStream ,socket, message, ice_list, current_caller);
           setIs_calling(false);
         }}
       >

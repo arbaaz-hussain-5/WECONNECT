@@ -1,30 +1,30 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Notification.css";
 import { useParams } from "react-router";
-import { isUser } from "../../isUser";
 
 function Notification() {
   const [not_his, setNot_his] = useState([]);
   const [dre, setDre] = useState(0);
-  const cu = useContext(isUser);
-  const token = cu.auth_token;
-
   const id = useParams().ids;
   useEffect(() => {
-    fetch("/api/get_freind_request", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ user_id: id }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    }).then(async (response) => {
+      if (response.status == 200) {
+        const data = await response.json();
         setNot_his(data);
-      });
-  }, [id, token]);
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
+  }, [id]);
 
   return (
     <div className="notf_page">
@@ -32,10 +32,11 @@ function Notification() {
         <div className="nothead">
           <span>NOTIFICATIONS</span>
         </div>
-        {not_his.map((data) => {
+        {not_his.map((data, index) => {
           if (data[0] == "arrived") {
             return (
               <NotElementArr
+                key={index}
                 id={id}
                 name={data[1]}
                 setDre={setDre}
@@ -43,7 +44,14 @@ function Notification() {
               />
             );
           } else if (data[0] == "dispatch") {
-            return <NotElementDis id={id} name={data[1]} setDre={setDre} />;
+            return (
+              <NotElementDis
+                key={index}
+                id={id}
+                name={data[1]}
+                setDre={setDre}
+              />
+            );
           }
         })}
       </div>
@@ -55,7 +63,7 @@ function Notification() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect width="128" height="128" fill="#fff6ec" />
-          <g stroke="#000" stroke-width="4" fill="none">
+          <g stroke="#000" strokeWidth="4" fill="none">
             <path
               d="M20 40 h40 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-8 l-12 10 v-10 h-20 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10 z"
               fill="#ffffff"
@@ -64,7 +72,7 @@ function Notification() {
             <circle cx="45" cy="60" r="3" fill="#000" />
             <circle cx="55" cy="60" r="3" fill="#000" />
           </g>
-          <g stroke="#000" stroke-width="4" fill="#a0a0a0">
+          <g stroke="#000" strokeWidth="4" fill="#a0a0a0">
             <rect x="70" y="40" width="40" height="30" rx="4" ry="4" />
             <polygon
               points="110,45 125,55 110,65"
@@ -81,56 +89,64 @@ function Notification() {
 function NotElementArr({ id, name, setDre }) {
   const [decision, setDecision] = useState(false);
   const [pic, setPic] = useState(null);
-  const cu = useContext(isUser);
-  const token = cu.auth_token;
   useEffect(() => {
-    fetch("/api/get_profile_pic", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ user_id: id, pic_id: name }),
-    })
-      .then((response) => response.text())
-      .then((data) => {
+    }).then(async (response) => {
+      if (response.status == 200) {
+        const data = await response.text();
         setPic(data);
-      });
-  }, [id, token, name]);
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
+  }, [id, name]);
 
   function addFrd() {
-    fetch("/api/addfreind", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/addfreind`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ user_1: id, user_2: name }),
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log(data);
+    }).then((response) => {
+      if (response.status == 200) {
+        console.log("freind added successfully");
         setDre(Date.now());
-      });
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
   }
 
   function rejectRequest() {
-    fetch("/api/remove_freind_request", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ user_1: id, user_2: name }),
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log(data);
+    }).then((response) => {
+      if (response.status == 200) {
+        console.log("freind request removed successfully");
         setDre(Date.now());
-      });
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
   }
   if (!decision) {
     return (
@@ -145,7 +161,6 @@ function NotElementArr({ id, name, setDre }) {
             onClick={() => {
               addFrd();
               setDecision(true);
-              alert("added to freinds");
             }}
           >
             Accept
@@ -168,46 +183,57 @@ function NotElementArr({ id, name, setDre }) {
 
 function NotElementDis({ id, name, setDre }) {
   const [decision, setDecision] = useState(false);
-  const cu = useContext(isUser);
-  const token = cu.auth_token;
   const [pic, setPic] = useState(null);
 
   useEffect(() => {
-    fetch("/api/get_profile_pic", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ user_id: id, pic_id: name }),
-    })
-      .then((response) => response.text())
-      .then((data) => {
+    }).then(async (response) => {
+      if (response.status == 200) {
+        const data = await response.text();
         setPic(data);
-      });
-  }, [id, token, name]);
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
+  }, [id, name]);
   function withDrawRequest() {
-    fetch("/api/remove_freind_request", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ user_1: id, user_2: name }),
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log(data);
+    }).then((response) => {
+      if (response.status == 200) {
         setDre(Date.now());
-      });
+        console.log("freind request removed successfully");
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
   }
   if (!decision) {
     return (
       <div className="NotElement">
         <div>
-          <img src={pic?pic:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"} />
+          <img
+            src={
+              pic
+                ? pic
+                : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+            }
+          />
           <span>{name}</span>
         </div>
 

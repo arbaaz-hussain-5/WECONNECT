@@ -6,7 +6,7 @@ export default async function uploadToServer(req, res) {
   //   }
   const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
-  
+
   console.log(req.file.originalname);
   console.log(res.tuser)
   const imagekit = new ImageKit({
@@ -28,10 +28,9 @@ export default async function uploadToServer(req, res) {
           $set: { profile_pic: response.url },
         }
       )
-       res.send(response.url);;
+      res.status(200).send("image uploaded successfully");;
     })
     .catch((error) => {
-      console.log(error);
-      res.send("something went wrong");
+      return res.status(503).send("unable to connect to database");
     });
 }

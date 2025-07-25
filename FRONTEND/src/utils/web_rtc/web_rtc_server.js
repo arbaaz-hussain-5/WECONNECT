@@ -1,5 +1,5 @@
 
-export async function makeCall(video_po, socket, receiver) {
+export async function makeCall(VideoStream, socket, receiver) {
     const openMediaDevices = async (constraints) => {
         return await navigator.mediaDevices.getUserMedia(constraints);
     }
@@ -16,6 +16,7 @@ export async function makeCall(video_po, socket, receiver) {
     peerConnection.addEventListener('track', async (event) => {
         console.log("peer added track to peerConnection Object")
         console.log(event.streams);
+        VideoStream.video_elm_remote.current.srcObject = event.streams[0]
     });
     peerConnection.addEventListener('connectionstatechange', (event) => {
         if (peerConnection.connectionState === 'connected') {
@@ -56,7 +57,11 @@ export async function makeCall(video_po, socket, receiver) {
     } catch (error) {
         console.error('Error accessing media devices.', error);
     }
-    video_po.current_stream = localStream;
+    VideoStream.current_stream = localStream
+    VideoStream.video_elm_local.current.srcObject = localStream
+    console.log("inWebRtc")
+    console.log(VideoStream)
+
     const offer = await peerConnection.createOffer();
     await peerConnection.setLocalDescription(offer);
 
@@ -65,10 +70,28 @@ export async function makeCall(video_po, socket, receiver) {
     console.log(offer)
 }
 
-export async function receiveCall(video_ro, socket, message, ice_list, sender) {
+export async function receiveCall(VideoStream, socket, message, ice_list, sender) {
+
+
+    const openMediaDevices = async (constraints) => {
+        return await navigator.mediaDevices.getDisplayMedia(constraints);
+    }
+    const localStream = await openMediaDevices({
+        video: {
+            cursor: 'always' | 'motion' | 'never',
+            displaySurface: 'application' | 'browser' | 'monitor' | 'window'
+        }
+    });
+
+    VideoStream.current_stream = localStream
+    const track = localStream.getTracks()
+    console.log("zzzzzzzzzzzzzzzzzzzz")
+    console.log(track)
+    VideoStream.video_elm_local.current.srcObject = localStream
 
     const configuration = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }] }
     let peerConnection = new RTCPeerConnection(configuration);
+    peerConnection.addTrack(track[0], localStream)
     peerConnection.setRemoteDescription(new RTCSessionDescription(message.offer));
 
     peerConnection.addEventListener('track', async (event) => {
@@ -77,7 +100,7 @@ export async function receiveCall(video_ro, socket, message, ice_list, sender) {
         const track = event.streams[0].getTracks()
         console.log("added mediastream tracks array");
         console.log(track)
-        video_ro.current_stream = event.streams[0]
+        VideoStream.video_elm_remote.current.srcObject = event.streams[0]
     });
 
     peerConnection.addEventListener('connectionstatechange', async (event) => {
@@ -101,6 +124,8 @@ export async function receiveCall(video_ro, socket, message, ice_list, sender) {
             socket.emit("send_message_rtc", { 'icecandidate': event.candidate }, sender);
         }
     });
+
+    
 
     peerConnection.createDataChannel('test')
     const answer = await peerConnection.createAnswer();

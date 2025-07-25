@@ -1,20 +1,19 @@
-import { StrictMode } from "react";
+
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
-import Login from "./Login.jsx";
-import SignUp from "./SignUp.jsx";
+import Login from "./pages/login/Login.jsx";
+import SignUp from "./pages/sign_up/SignUp.jsx";
 import { BrowserRouter, Routes, Route } from "react-router";
-import ChatPage from "./components/ChatPage.jsx";
-import Profile from "./components/profile/Profile.jsx";
+import ChatPage from "./pages/chat_page/ChatPage.jsx";
+import Profile from "./pages/profile/Profile.jsx";
 import Notification from "./components/notification/Notification.jsx";
-import ProfileUpload from "./ProfileUpload.jsx";
+import ProfileUpload from "./pages/profile_upload/ProfileUpload.jsx";
 import VideoCall from "./components/video_call/VideoCall.jsx";
+import Home from "./pages/home/Home.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Home/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/profileupload" element={<ProfileUpload />} />
       <Route path="/signup" element={<SignUp />} />

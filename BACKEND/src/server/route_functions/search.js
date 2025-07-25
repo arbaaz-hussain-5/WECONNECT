@@ -1,7 +1,6 @@
 import { connectBase } from "../../database/get_database.js";
 
 export default async function search(req, res) {
-  console.log("current user:" + req.userId)
   if (req.userId !== req.body.user_id) {
     return res.status(401).send("Unauthorized: Invalid Authorization header");
   }
@@ -10,9 +9,12 @@ export default async function search(req, res) {
   const reg = req.body.reg;
   let regex = new RegExp("^" + reg, "i");
   users
-    .find({ user_id: regex },{ projection: { user_id: 1, profile_pic: 1 } })
+    .find({ user_id: regex }, { projection: { user_id: 1, profile_pic: 1 } })
     .toArray()
     .then((data) => {
-      res.send(data);
-    });
+      res.status(200).send(data);
+    }).catch(() => {
+      return res.status(503).send("unable to connect to databas");
+    }
+    );
 }

@@ -5,27 +5,37 @@ import { connectBase } from "../../database/get_database.js";
 export default async function login(req, res) {
   const data_base = (connectBase()).db("CHAT-BASE");
   const users = data_base.collection("users");
-  const is_user = await users.findOne({ user_id: req.body.user_id });
+  let is_user;
+  try {
+    is_user = await users.findOne({ user_id: req.body.user_id });
+  }
+  catch {
+    return res.status(503).send("Unable To Connect To Databas");
+  }
   if (is_user !== null) {
-    const password = (await users.findOne({ user_id: req.body.user_id }))
-      .password;
-    console.log(password);
+    let password;
+    try {
+      password = (await users.findOne({ user_id: req.body.user_id }))
+        .password;
+    } catch {
+      return res.status(503).send("Unable To Connect To Databas");
+    }
     bcrypt.compare(req.body.password, password, (err, result) => {
       if (result) {
         const token = jwt.sign(req.body.user_id, "CHATAPP");
         res.cookie("ChatToken", token, {
           httpOnly: true,
           secure: true,
-          sameSite: "Lax",
+          sameSite: "none",
+          domain: "chatline-5n3w.onrender.com",
         });
-        res.json({ token: token });
+        return res.status(200).send(token);
       } else {
-        res.send("wrong password");
+        return res.status(401).send('Invalid Password')
       }
     });
   }
-
   if (is_user === null) {
-    res.send("user not found");
+    return res.status(204).send('USER NOT REGISTEREd')
   }
 }

@@ -5,7 +5,12 @@ export default async function isNotification(req, res) {
     return res.status(401).send("Unauthorized: Invalid Authorization header");
   }
   const data_base = (connectBase()).db("CHAT-BASE");
-  const users = data_base.collection("users");
-  const data = (await users.findOne({ user_id: req.body.user_id })).notifications;
-  res.send(data);
+  try {
+    const users = data_base.collection("users");
+    const data = (await users.findOne({ user_id: req.body.user_id })).notifications;
+    res.status(200).send(data);
+  }
+  catch {
+    return res.status(503).send("unable to connect to database");
+  }
 }

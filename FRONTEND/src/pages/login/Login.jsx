@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./Login.css";
-import { useContext } from "react";
-import { isUser } from "./isUser";
 function Login() {
   const [user_id, setUser_id] = useState(null);
   const [password, setPassword] = useState(null);
-  const ku = useContext(isUser);
   const navigate = useNavigate();
   return (
     <div className="login">
@@ -27,35 +24,32 @@ function Login() {
 
         <button
           onClick={async () => {
-            let k = "";
-            await fetch("/api/login", {
+            await fetch(`/${import.meta.env.VITE_SERVER_URL}/login`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({ user_id: user_id, password: password }),
-            })
-              .then((response) => {
-                console.log(response);
-                return response.json();
-              })
-              .then((data) => {
-                k = data.token;
-                console.log(k);
-              });
-            if (k !== "wrong password" && k !== "user not found") {
-              ku.auth = true;
-              ku.user = user_id;
-              ku.auth_token = k;
-              console.log(ku);
-              sessionStorage.setItem("current_user", user_id);
-              sessionStorage.setItem("current_cdi", []);
-              console.log("local storage");
-              console.log(sessionStorage);
-              console.log(sessionStorage.getItem("current_user"));
-              console.log(sessionStorage.getItem("current_use"));
-              navigate("/");
-            }
+            }).then(async (response) => {
+              if (response.status == 200) {
+                const token = await response.text();
+                // ku.auth = true;
+                // ku.user = user_id;
+                // ku.auth_token = token;
+                // console.log(ku);
+                sessionStorage.setItem("current_user", user_id);
+                sessionStorage.setItem("is_auth", "true")
+                console.log("local storage");
+                console.log(sessionStorage);
+                navigate("/");
+              } else if (response.status == 204) {
+                alert("user not registerd");
+              } else if (response.status == 401) {
+                alert("invalid password");
+              } else {
+                alert("something went wrong while processing your request");
+              }
+            });
           }}
         >
           LOGIN

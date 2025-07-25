@@ -17,8 +17,8 @@ export default async function getFreindRequest(req, res) {
         },
       }
     );
-    res.send(data);
+    return res.status(200).send(data);
   } catch {
-    res.send("notfound");
+    return res.status(503).send("unable to connect to databas");
   }
 }

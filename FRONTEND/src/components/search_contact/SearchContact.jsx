@@ -1,42 +1,44 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./SearchContact.css";
 import { useNavigate } from "react-router";
-import { isUser } from "../../isUser";
-function SearchContact({ search_data, current_user }) {
-  const uc = useContext(isUser);
 
-  const token = uc.auth_token;
+function SearchContact({ search_data, current_user }) {
   const [daser, setDaser] = useState([]);
   console.log(search_data);
   useEffect(() => {
-    fetch("/api/search", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ user_id: current_user, reg: search_data }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    }).then(async (response) => {
+      if (response.status == 200) {
+        const data = await response.json();
         setDaser(data);
-        console.log(data)
-      });
-  }, [search_data, token, current_user]);
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
+  }, [search_data, current_user]);
 
   return (
     <div className="search_contact">
       <div className="serhead">
-          <span>People</span>
-        </div>
-      {daser.map((cont) => {
-        return <SearchCon name={cont.user_id} pic = {cont.profile_pic} />;
+        <span>People</span>
+      </div>
+      <div className="sscon">
+      {daser.map((cont, index) => {
+        return <SearchCon key = {index} name={cont.user_id} pic={cont.profile_pic} />;
       })}
+      </div>
     </div>
   );
 }
 
-function SearchCon({ name, pic}) {
+function SearchCon({ name, pic }) {
   const navigate = useNavigate();
   return (
     <div

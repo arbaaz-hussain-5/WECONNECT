@@ -1,48 +1,42 @@
-@import url('https://unpkg.com/@csstools/normalize.css');
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap');
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+
+:root {
+    --blue: #34B7F1;
+    --white: #ffffff;
+
+    --fsize: calc(100vw/80);
+    --vgap: calc(100vw/200)
 }
+.message_board_none {
+    width: 75vw;
+    height: 100vh;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
 
-html,
-body {
-    height: 100%;
-    font-family: 'Lora', serif;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+.message_board_none > svg{
+    width: 20vw;
+    height: 20vw;
 }
 
 
 .message_board {
     width: 75vw;
     height: 100vh;
-    background-color: #fff6ec;
+    background-color: #000000;
     display: flex;
     flex-direction: column;
     align-items: center;
-  
+
+     
 }
 
 .search_users {
     width: 100%;
-    height: 8%;
+    height: 8%z;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,40 +53,63 @@ h6 {
     height: 90%;
     width: 100%;
     overflow: auto;
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 .Write_message {
-    width: 100%;
-    height: 10%;
+    height: calc(var(--fsize)*3);
+    width: 99%;
     display: flex;
-    align-items: center;
+    border-radius: calc(var(--fsize)*3);
     justify-content: center;
-    gap: 0.2rem;
+    align-items: center;
+    gap: calc(var(--fsize)*0.2);
+    margin-bottom: calc(var(--fsize)*1.25);
 }
 
 .Write_message>input {
-    width: 90%;
-    height: 70%;
-    border-radius: 9vh;
+    height: calc(var(--fsize)*2.5);
+    border: none;
+    width: 70%;
+    border-radius: calc(var(--fsize)*2.5) 0 0 calc(var(--fsize)*2.5);
+    background-color: black;
+    border:calc(var(--fsize)*0.1) solid #db4d4d;
+    color: white;
+    padding: 0 calc(var(--fsize)*1);
+    font-size:calc(var(--fsize)*1);
+       
+    
+}
 
+.Write_message>input:focus {
+    outline: none;
 }
 
 .Write_message>button {
-    height: 70%;
-    padding: 7px;
-    background-color: black;
+
+    height: calc(var(--fsize)*2.5);
+    width: calc(var(--fsize)*4);
+    background-color:#34B7F1;
     color: white;
+    border: none;
+    border-radius: 0 calc(var(--fsize)*2.5) calc(var(--fsize)*2.5) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:calc(var(--fsize)*1);
+
 
 }
 
 .chat_messages {
+    padding: calc(var(--fsize)*0.5);
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
 .send_message_incomming {
-    padding: 7px;
     width: 100%;
     display: flex;
     justify-content: left;
@@ -101,7 +118,7 @@ h6 {
 
 
 .send_message_outgoing {
-    padding: 7px;
+
     width: 100%;
     display: flex;
     justify-content: right;
@@ -111,69 +128,120 @@ h6 {
 
 
 .send_message_incomming>div {
-    padding: 7px;
-    background-color: black;
+    background-color: #34B7F1;
     color: white;
-    border-radius: 7px;
+    font-size: var(--fsize);
+    border-radius: var(--fsize);
     max-width: 45%;
     word-wrap: break-word;
+    padding: calc(var(--fsize)*0.2) calc(var(--fsize)*0.5);
 }
 
 .send_message_outgoing>div {
-    padding: 7px;
     max-width: 45%;
-    background-color: black;
+    background-color: #34B7F1;
     color: white;
-    border-radius: 7px;
+    font-size: var(--fsize);
+    border-radius: var(--fsize);
     word-wrap: break-word;
+    padding: calc(var(--fsize)*0.2) calc(var(--fsize)*0.5);
 }
 
-.type_message {}
 
 .chat_not_bar {
-    height: 9%;
+    height: calc(var(--fsize)*3);
     width: 99%;
-    background-color: pink;
+    background-color: #25D366;
     display: flex;
-    padding: 0px 10px;
-    border-radius: 9vh;
+    border-radius: calc(var(--fsize)*3);
     justify-content: space-between;
     align-items: center;
+    padding: 0 calc(var(--fsize)*2);
 }
 
 .videocall {
-    height: 45px;
-    width: 45px;;
+
+    height: calc(var(--fsize)*2.6);
+    width: calc(var(--fsize)*2.6);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 50px;
-    background-color:rgb(117, 178, 217);
-    border-radius: 25px;
+    background-color: #db4d4d;
+    border-radius: calc(var(--fsize)*2.6);
+}
+
+.call {
+    display: flex;
+    height: calc(var(--fsize)*3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--fsize)*2);
+
 }
 
 .videocall>svg {
-  
-    height: 30px;
-  width: auto;
+    height: calc(var(--fsize)*1.5);
+    width: calc(var(--fsize)*1.5);
+
+
     fill: black;
-    
-    
+
+
 
 }
+
+.audiocall {
+
+
+    height: calc(var(--fsize)*2.6);
+    width: calc(var(--fsize)*2.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(117, 178, 217);
+    border-radius: calc(var(--fsize)*2.6);
+    background-color: #db4d4d;
+}
+
+.audiocall>svg {
+    height: calc(var(--fsize)*2.6);
+    width: calc(var(--fsize)*2.6);
+
+    height: calc(var(--fsize)*1.5);
+    width: calc(var(--fsize)*1.5);
+    fill: black;
+
+
+
+}
+
+
 
 .tpro {
     display: flex;
-    height: 100%;
+    height: calc(var(--fsize)*3);
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: calc(var(--fsize)*1);
+
 }
 
+
+.tpro>span {
+
+    font-size: calc(var(--fsize)*1);
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: calc(var(--fsize)*1);
+    padding: calc(var(--fsize)*0.1) calc(var(--fsize)*1);
+}
+
+
 .tpro>img {
-    height: 90%;
-    width: auto;
-    border-radius: 60px;
+    height: calc(var(--fsize)*2.6);
+    width: calc(var(--fsize)*2.6);
+    border-radius: calc(var(--fsize)*2.6);
 }
 
 .mbsvg {
@@ -183,7 +251,7 @@ h6 {
 
 .msgspan {
     font-size: 30px;
-    background-color: pink;
+    background-color: rgb(111, 52, 139);
     padding: 10px 20px;
     border-radius: 35px;
 

@@ -1,38 +1,36 @@
 import "./NavBar.css";
 import { NavLink, Link } from "react-router";
-import { useContext } from "react";
-import { isUser } from "../../isUser";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 function NavBar() {
-  const usob = useContext(isUser);
   const user = sessionStorage.getItem("current_user");
   const [isnotf, setIsnotf] = useState(false);
-  if (user !== null) {
-    usob.auth = true;
-    usob.user = user;
-  }
-  const [uauth, setUauth] = useState(false);
+  const [uauth, setUauth] = useState(sessionStorage.getItem("is_auth"));
   const [isham, setIsHam] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("/api/notfication_status", {
+    fetch(`/${import.meta.env.VITE_SERVER_URL}/notfication_status`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ user_id: user }),
-    })
-      .then((response) => response.text())
-      .then((data) => {
+    }).then(async (response) => {
+      if (response.status == 200) {
+        const data = await response.text();
         if (data == "true") {
           setIsnotf(true);
         } else {
           setIsnotf(false);
         }
-      });
+      } else if (response.status == 401) {
+        console.log("unauthorized access");
+      } else {
+        console.log("something went wrong while processing your request");
+      }
+    });
   }, [user]);
   return (
     <div className="nav_bar">
@@ -93,7 +91,7 @@ function NavBar() {
         </div>
       </div>
       <div className="right_nav">
-        {!usob.auth ? (
+        {!uauth ? (
           <>
             <div className="login_logout">
               <NavLink to="/login">LOGIN</NavLink>
@@ -110,10 +108,8 @@ function NavBar() {
                 to="/"
                 onClick={() => {
                   sessionStorage.removeItem("current_user");
-                  usob.auth = false;
-                  usob.user = undefined;
-                  usob.auth_token = undefined;
-                  setUauth(!uauth);
+                  setUauth(false)
+                  sessionStorage.removeItem("is_auth")
                 }}
               >
                 LOGOUT
@@ -123,7 +119,7 @@ function NavBar() {
             <div
               className={isnotf ? "notfication_bell" : "not_notfication_bell"}
               onClick={() => {
-                navigate("/notifications/" + usob.user);
+                navigate("/notifications/" + user);
               }}
             >
               {isnotf ? <div className="notf_dot"></div> : null}
@@ -141,7 +137,7 @@ function NavBar() {
             <div
               className="account"
               onClick={() => {
-                navigate("/profile/" + usob.user);
+                navigate("/profile/" + user);
               }}
             >
               <svg
@@ -158,7 +154,7 @@ function NavBar() {
             <div
               className="Chat_Message"
               onClick={() => {
-                navigate("/" + usob.user);
+                navigate("/" + user);
               }}
             >
               <svg
