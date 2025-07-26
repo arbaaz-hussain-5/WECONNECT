@@ -26,9 +26,8 @@ export default async function login(req, res) {
         res.cookie("ChatToken", token, {
           httpOnly: true,
           secure: true,
-          sameSite: 'none',
-          domain: 'onrender.com'
-
+          sameSite: "none",
+          domain: "weconnect-xj4a.onrender.com",
         });
         return res.status(200).send(token);
       } else {
