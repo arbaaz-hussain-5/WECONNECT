@@ -8,6 +8,7 @@ function SearchContact({ search_data, current_user }) {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/search`, {
       method: "POST",
+      credentials:"include",
       headers: {
         "Content-Type": "application/json",
       },

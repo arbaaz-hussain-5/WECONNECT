@@ -26,7 +26,7 @@ function Login() {
           onClick={async () => {
             await fetch(`${import.meta.env.VITE_SERVER_URL}/login`, {
               method: "POST",
-                 credentials: "include",
+              credentials: "include",
               headers: {
                 "Content-Type": "application/json",
               },
