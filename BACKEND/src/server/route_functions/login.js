@@ -24,9 +24,8 @@ export default async function login(req, res) {
       if (result) {
         const token = jwt.sign(req.body.user_id, "CHATAPP");
         res.cookie("ChatToken", token, {
-          maxAge: 15 * 60 * 1000,
           httpOnly: true,
-          secure: true,
+          secure: false,
           sameSite: 'None',
           domain: 'weconnect-xj4a.onrender.com'
 
