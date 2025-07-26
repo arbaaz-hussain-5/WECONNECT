@@ -24,7 +24,7 @@ function Login() {
 
         <button
           onClick={async () => {
-            await fetch("https://weconnect-xj4a.onrender.com/login", {
+            await fetch(`${import.meta.env.VITE_SERVER_URL}/login`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -32,13 +32,8 @@ function Login() {
               body: JSON.stringify({ user_id: user_id, password: password }),
             }).then(async (response) => {
               if (response.status == 200) {
-                const token = await response.text();
-                // ku.auth = true;
-                // ku.user = user_id;
-                // ku.auth_token = token;
-                // console.log(ku);
                 sessionStorage.setItem("current_user", user_id);
-                sessionStorage.setItem("is_auth", "true")
+                sessionStorage.setItem("is_auth", "true");
                 console.log("local storage");
                 console.log(sessionStorage);
                 navigate("/");

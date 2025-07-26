@@ -24,11 +24,10 @@ export default async function login(req, res) {
       if (result) {
         const token = jwt.sign(req.body.user_id, "CHATAPP");
         res.cookie("ChatToken", token, {
-         
-           httpOnly: true,
-           secure: true,
-           sameSite: "none",
-           domain:"weconnect-xj4a.onrender.com",
+          httpOnly: true,
+          secure: process.env.IS_PRODUCTION == "true" ? true : false,
+          sameSite: process.env.IS_PRODUCTION == "true" ? "none" : "Lax",
+          domain:process.env.SERVER_DOMAIN 
         });
         return res.status(200).send(token);
       } else {

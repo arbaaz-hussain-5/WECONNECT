@@ -25,6 +25,7 @@ function ProfileUpload() {
             fetch(`${import.meta.env.VITE_SERVER_URL}/uploadsingle`, {
               method: "POST",
               body: current_file,
+              credentials: "include"
             }).then((response) => {
               if (response.status == 200) {
                 console.log("profile changed successfilly");

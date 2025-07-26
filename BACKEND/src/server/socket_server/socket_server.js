@@ -3,7 +3,7 @@ import { connectBase } from "../../database/get_database.js";
 export default function socketServer(server) {
   const io_server = new Server(server, {
     cors: {
-      origin: "https://weconnect-beta.vercel.app",
+      origin: process.env.CLIENT,
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
       credentials: true,
     },

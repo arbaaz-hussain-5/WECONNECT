@@ -29,13 +29,13 @@ export default async function runServer() {
   try {
     await connectBase().connect()
   }
-  catch(error){
+  catch (error) {
     console.log("unable to connect to data base")
     console.error(error)
   }
   app.use(
     cors({
-      origin: "https://weconnect-beta.vercel.app",
+      origin: process.env.CLIENT,
       credentials: true,
     })
   );
