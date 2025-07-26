@@ -10,8 +10,6 @@ function verifyToken(req, res, next) {
   try {
     const decoded = jwt.verify(token, "CHATAPP");
     req.userId = decoded;
-    console.log("userrrrrrrrrr")
-    console.log(decoded)
     next();
   } catch (error) {
     return res.status(401).json({ error: "Invalid token" });

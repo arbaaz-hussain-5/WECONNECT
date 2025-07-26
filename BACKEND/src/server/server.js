@@ -26,6 +26,7 @@ export default async function runServer() {
   const app = express();
   const server = createServer(app);
   const port = process.env.PORT;
+
   try {
     await connectBase().connect()
   }
@@ -33,18 +34,17 @@ export default async function runServer() {
     console.log("unable to connect to data base")
     console.error(error)
   }
+
   app.use(
     cors({
       origin: process.env.CLIENT,
       credentials: true,
     })
   );
-
   app.use(express.json());
   app.use(cookieParser());
   app.post("/signup", signUp);
   app.post("/login", login);
-
   app.use(verifyToken);
   app.post("/uploadsingle", upload.single("file"), uploadToServer);
   app.post("/getfreinds", getFreinds);

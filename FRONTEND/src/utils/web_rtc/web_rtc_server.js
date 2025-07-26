@@ -4,7 +4,8 @@ export async function makeCall(VideoStream, socket, receiver) {
         return await navigator.mediaDevices.getUserMedia(constraints);
     }
     const localStream = await openMediaDevices({
-        'video': true
+        'video': true,
+        'audio':true
     });
     console.log("got local mediastream object");
     console.log(localStream)
@@ -52,7 +53,9 @@ export async function makeCall(VideoStream, socket, receiver) {
     try {
         console.log("local media stream track is adder befor connection");
         console.log(track[0]);
+        console.log(track[1]);
         peerConnection.addTrack(track[0], localStream)
+        peerConnection.addTrack(track[1], localStream)
 
     } catch (error) {
         console.error('Error accessing media devices.', error);
@@ -74,13 +77,11 @@ export async function receiveCall(VideoStream, socket, message, ice_list, sender
 
 
     const openMediaDevices = async (constraints) => {
-        return await navigator.mediaDevices.getDisplayMedia(constraints);
+        return await navigator.mediaDevices.getUserMedia(constraints);
     }
     const localStream = await openMediaDevices({
-        video: {
-            cursor: 'always' | 'motion' | 'never',
-            displaySurface: 'application' | 'browser' | 'monitor' | 'window'
-        }
+        'video': true,
+        'audio':true
     });
 
     VideoStream.current_stream = localStream
@@ -92,6 +93,7 @@ export async function receiveCall(VideoStream, socket, message, ice_list, sender
     const configuration = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }] }
     let peerConnection = new RTCPeerConnection(configuration);
     peerConnection.addTrack(track[0], localStream)
+    peerConnection.addTrack(track[1], localStream)
     peerConnection.setRemoteDescription(new RTCSessionDescription(message.offer));
 
     peerConnection.addEventListener('track', async (event) => {

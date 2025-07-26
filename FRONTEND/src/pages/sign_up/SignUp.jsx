@@ -9,29 +9,33 @@ function SignUp() {
   return (
     <div className="signup">
       <div className="signup_box">
-        <h4>USER ID</h4>
-        <input
-          value={user_id}
-          onChange={(event) => {
-            setUser_id(event.target.value);
-          }}
-        />
-        <br />
-        <h4>PASSWORD</h4>
-        <input
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <br />
-        <h4>CONFIRM PASSWORD</h4>
-        <input
-          value={confirm_password}
-          onChange={(event) => {
-            setConfirm_Password(event.target.value);
-          }}
-        />
+        <div>
+          <h4>USER ID</h4>
+          <input
+            value={user_id}
+            onChange={(event) => {
+              setUser_id(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <h4>PASSWORD</h4>
+          <input
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <h4>CONFIRM PASSWORD</h4>
+          <input
+            value={confirm_password}
+            onChange={(event) => {
+              setConfirm_Password(event.target.value);
+            }}
+          />
+        </div>
 
         <button
           onClick={async () => {

@@ -1,4 +1,3 @@
-
 :root {
   --blue: #34B7F1;
   --white: #ffffff;
@@ -17,8 +16,75 @@
 }
 
 .signup_box {
-   height: 25vw;
-    width: 25vw;
+  height: 25vw;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(78, 48, 48);
+  border-radius: 0px calc(var(--fsize)*5) 0px calc(var(--fsize)*5);
+  color: white;
+  font-size: var(--fsize);
+  max-height: 100vh;
+}
+
+.signup_box>div {
+  margin-top: calc(var(--fsize)*1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup_box input {
+  width: calc(25vw * 0.9);
+  height: calc(25vw * 0.1);
+  border: none;
+  font-size: var(--fsize);
+  cursor: pointer;
+}
+
+.signup_box input:focus {
+  outline: none;
+  border: calc(var(--fsize)*0.1) solid #25D366;
+}
+
+.signup_box button {
+  margin-top: calc(var(--fsize)*1);
+  border: none;
+  height: calc(25vw * 0.1);
+  cursor: pointer;
+  background-color: #25D366;
+  font-size: var(--fsize);
+  padding: 0 var(--fsize);
+}
+
+
+.new_sign {
+  margin-top: calc(var(--fsize) *0.75);
+  color: aliceblue;
+  cursor: pointer;
+  font-size: calc(var(--fsize));
+}
+
+
+
+
+
+
+
+
+@media (min-aspect-ratio:10/16) and (max-aspect-ratio: 16/10) {
+
+
+
+
+
+
+  .signup_box {
+    height: 50vw;
+    width: 50vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,28 +94,110 @@
     color: white;
     font-size: var(--fsize);
     max-height: 100vh;
-}
 
-.signup_box>input {
-    margin-top: var(--fsize);
-    width: calc(25vw * 0.9);
-    height: calc(25vw * 0.1);
+  }
+
+  .signup_box input {
+    width: calc(50vw * 0.9);
+    height: calc(50vw * 0.1);
     border: none;
-    font-size: var(--fsize);
     cursor: pointer;
-}
+    font-size: calc(var(--fsize)*2);
+    padding: 0 calc(var(--fsize)/2.5);
+  }
 
-.signup_box>input:focus {
-outline: none;
-   border: 2px solid#25D366;
-}
 
-.signup_box>button {
-   margin-top:  calc(var(--fsize)*1);
+  .signup_box input:focus {
+    outline: none;
+    border: calc(var(--fsize)*0.2) solid#25D366;
+  }
+
+  .signup_box>div {
+    margin-top: calc(var(--fsize)*2);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: calc(var(--fsize)*2);
+  }
+
+  .signup_box button {
+    margin-top: calc(var(--fsize)*2);
     border: none;
-    height: calc(25vw * 0.1);
+    height: calc(25vw * 0.2);
     cursor: pointer;
-    background-color:#25D366;
+    background-color: #25D366;
+    font-size: calc(var(--fsize)*2);
+    padding: 0 calc(var(--fsize)*2);
+
+  }
+
+  .new_sign {
+    margin-top: calc(var(--fsize) *1.5);
+    color: aliceblue;
+    cursor: pointer;
+    font-size: calc(var(--fsize)*2);
+  }
+
+}
+
+@media (min-aspect-ratio:0) and (max-aspect-ratio: 10/16) {
+
+
+  .signup_box {
+    height: 70vw;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(78, 48, 48);
+    border-radius: 0px calc(var(--fsize)*15) 0px calc(var(--fsize)*15);
+    color: white;
     font-size: var(--fsize);
-    padding: 0 var(--fsize);
+    max-height: 100vh;
+
+  }
+
+  .signup_box input {
+    width: calc(70vw * 0.9);
+    height: calc(70vw * 0.1);
+    border: none;
+    cursor: pointer;
+    font-size: calc(var(--fsize)*3);
+    padding: 0 calc(var(--fsize)/2.5);
+  }
+
+
+  .signup_box input:focus {
+    outline: none;
+      border: calc(var(--fsize)*0.2) solid#25D366;
+  }
+
+  .signup_box>div {
+    margin-top: calc(var(--fsize)*3);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: calc(var(--fsize)*3);
+  }
+
+  .signup_box button {
+    margin-top: calc(var(--fsize)*3);
+    border: none;
+    height: calc(25vw * 0.3);
+    cursor: pointer;
+    background-color: #25D366;
+    font-size: calc(var(--fsize)*4);
+    padding: 0 calc(var(--fsize)*4);
+
+  }
+
+  .new_sign {
+    margin-top: calc(var(--fsize) *1.5);
+    color: aliceblue;
+    cursor: pointer;
+    font-size: calc(var(--fsize)*3);
+  }
 }

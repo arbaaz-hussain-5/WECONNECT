@@ -8,20 +8,22 @@ function Login() {
   return (
     <div className="login">
       <div className="login_box">
-        <h4>USER ID</h4>
-        <input
-          onChange={(event) => {
-            setUser_id(event.target.value);
-          }}
-        />
-        <br />
-        <h4>PASSWORD</h4>
-        <input
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-
+        <div>
+          <h4>USER ID</h4>
+          <input
+            onChange={(event) => {
+              setUser_id(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <h4>PASSWORD</h4>
+          <input
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+          />
+        </div>
         <button
           onClick={async () => {
             await fetch(`${import.meta.env.VITE_SERVER_URL}/login`, {
