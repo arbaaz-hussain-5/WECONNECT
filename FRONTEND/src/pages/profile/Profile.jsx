@@ -14,7 +14,7 @@ function Profile() {
   let user = sessionStorage.getItem("current_user");
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}get_profile`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/get_profile`, {
       method: "POST",
       credentials: "include",
       headers: {
