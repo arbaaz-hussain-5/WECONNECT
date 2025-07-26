@@ -35,7 +35,7 @@ export default async function runServer() {
   }
   app.use(
     cors({
-      origin: process.env.CLIENT,
+      origin: "https://weconnect-beta.vercel.app",
       credentials: true,
     })
   );
