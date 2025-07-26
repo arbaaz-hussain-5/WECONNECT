@@ -36,7 +36,7 @@ function SignUp() {
         <button
           onClick={async () => {
             if (password === confirm_password) {
-              await fetch(`/${import.meta.env.VITE_SERVER_URL}/signup`, {
+              await fetch(`${import.meta.env.VITE_SERVER_URL}/signup`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

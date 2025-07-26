@@ -19,7 +19,7 @@ function MessageBoard({
   const VideoStream = useContext(isVideo);
   let user = sessionStorage.getItem("current_user");
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
       method: "POST",
       credentials: "include",
       headers: {

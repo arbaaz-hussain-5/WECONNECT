@@ -6,7 +6,7 @@ function SearchContact({ search_data, current_user }) {
   const [daser, setDaser] = useState([]);
   console.log(search_data);
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/search`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

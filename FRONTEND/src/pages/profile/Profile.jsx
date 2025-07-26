@@ -14,7 +14,7 @@ function Profile() {
   let user = sessionStorage.getItem("current_user");
 
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}get_profile`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}get_profile`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -35,7 +35,7 @@ function Profile() {
   }, [id, user]);
 
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/getfreinds`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/getfreinds`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -59,7 +59,7 @@ function Profile() {
   }, [user, id]);
 
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_freind_request`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/get_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -85,7 +85,7 @@ function Profile() {
   }, [user, id]);
 
   function sendRequest() {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/freind_request`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -103,7 +103,7 @@ function Profile() {
     });
   }
   function makeUnFreind() {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/removefreind`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/removefreind`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -122,7 +122,7 @@ function Profile() {
     });
   }
   function withDrawRequest() {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {

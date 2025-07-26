@@ -7,7 +7,7 @@ function Notification() {
   const [dre, setDre] = useState(0);
   const id = useParams().ids;
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_freind_request`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/get_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -90,7 +90,7 @@ function NotElementArr({ id, name, setDre }) {
   const [decision, setDecision] = useState(false);
   const [pic, setPic] = useState(null);
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -110,7 +110,7 @@ function NotElementArr({ id, name, setDre }) {
   }, [id, name]);
 
   function addFrd() {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/addfreind`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/addfreind`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -130,7 +130,7 @@ function NotElementArr({ id, name, setDre }) {
   }
 
   function rejectRequest() {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -186,7 +186,7 @@ function NotElementDis({ id, name, setDre }) {
   const [pic, setPic] = useState(null);
 
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -205,7 +205,7 @@ function NotElementDis({ id, name, setDre }) {
     });
   }, [id, name]);
   function withDrawRequest() {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/remove_freind_request`, {
       method: "POST",
       credentials: "include",
       headers: {

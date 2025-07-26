@@ -89,7 +89,7 @@ function ChatBoard({ current_user }) {
   }, [current_user]);
 
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/getfreinds`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/getfreinds`, {
       method: "POST",
       credentials: "include",
       headers: {

@@ -22,7 +22,7 @@ function ProfileUpload() {
 
         <button
           onClick={() => {
-            fetch(`/${import.meta.env.VITE_SERVER_URL}/uploadsingle`, {
+            fetch(`${import.meta.env.VITE_SERVER_URL}/uploadsingle`, {
               method: "POST",
               body: current_file,
             }).then((response) => {

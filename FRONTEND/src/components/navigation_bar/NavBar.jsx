@@ -10,7 +10,7 @@ function NavBar() {
   const [isham, setIsHam] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`/${import.meta.env.VITE_SERVER_URL}/notfication_status`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/notfication_status`, {
       method: "POST",
       credentials: "include",
       headers: {
