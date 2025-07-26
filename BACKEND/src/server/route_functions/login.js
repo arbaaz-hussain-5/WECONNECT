@@ -28,6 +28,7 @@ export default async function login(req, res) {
           secure: true,
           sameSite: "none",
           domain: "weconnect-xj4a.onrender.com",
+          path: "/"
         });
         return res.status(200).send(token);
       } else {
