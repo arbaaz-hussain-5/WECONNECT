@@ -24,7 +24,7 @@ function Login() {
 
         <button
           onClick={async () => {
-            await fetch(`${import.meta.env.VITE_SERVER_URL}/login`, {
+            await fetch("https://weconnect-xj4a.onrender.com/login", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
