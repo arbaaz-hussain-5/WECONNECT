@@ -73,7 +73,7 @@ function Contact({
   return (
     <div
       className="contact"
-      style={current_receiver === re_id ? { backgroundColor: "white" } : {}}
+      style={current_receiver === re_id ? { backgroundColor:"#34B7F1" } : {}}
       onClick={() => {
         set_Receiver_id(re_id);
         console.log(re_id);

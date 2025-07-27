@@ -1,4 +1,3 @@
-
 :root {
     --blue: #34B7F1;
     --white: #ffffff;
@@ -11,12 +10,15 @@
     width: 25vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
     overflow: auto;
-    background-color: #000000;
+    background-color: rgb(255, 255, 255);
     gap: calc(var(--fsize)*1);
     overflow: auto;
     scrollbar-width: none;
-    
+    border: calc(var(--fsize)*0.1) solid #000000;
+
+
 
 }
 
@@ -26,9 +28,6 @@
     flex-direction: column;
     align-items: center;
     padding: calc(var(--fsize)*0.25);
-    border: calc(var(--fsize)*0.1) solid #ffffff;
-    height:
-
 
 
 
@@ -36,13 +35,16 @@
 }
 
 .contact {
+
     display: flex;
     height: calc(var(--fsize)*3);
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    border-bottom: calc(var(--fsize)*0.1) solid #25D366;
+    border-bottom: calc(var(--fsize)*0.1) solid #000000;
     padding: 0 calc(var(--fsize)*0.25);
+
+    
 
 }
 
@@ -58,6 +60,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    color: #000000;
+    font-weight: 9000;
 
 }
 
@@ -65,10 +69,12 @@
     font-size: 85%;
     color: rgb(0, 255, 0);
     text-align: center;
+    font-weight: 9000;
 }
 
 .search_users {
-
+    margin-top:calc(var(--fsize)*0.1) ;
+background-color: #ffffff;
     display: flexbox;
     align-items: center;
     justify-content: center;
@@ -76,29 +82,31 @@
 }
 
 .search_users>input {
-    width: 100%;
+ width: calc(100% - var(--fsize)*0.4);
     height: 100%;
-    border: calc(var(--fsize)*0.1) solid #ffffff;
+border: calc(var(--fsize)*0.1) solid #000000;;
     font-size: calc(var(--fsize)*0.85);
-    padding:  calc(var(--fsize)*0.5);;
-    background-color: #000000;
-    color: white;
+    padding: calc(var(--fsize)*0.5);
+    background-color: #ffffff;
+    color: #000000;
 }
 
 
 .search_users>input:focus {
     outline: none;
+    border: calc(var(--fsize)*0.2) solid #25D366;
 
 }
 
 .genre {
-    width: 100%;
+    width: calc(100% - var(--fsize)*0.4);
     display: flex;
     align-items: center;
     height: calc(var(--fsize)*3);
     gap: calc(var(--fsize)*0.5);
-    border: calc(var(--fsize)*0.1) solid #ffffff;
+    border: calc(var(--fsize)*0.1) solid #000000;
     padding: calc(var(--fsize)*0.5);
+    background-color: rgb(78, 48, 48);
 
 }
 

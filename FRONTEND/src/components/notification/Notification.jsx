@@ -57,30 +57,30 @@ function Notification() {
       </div>
       <div className="notfi_side">
         <svg
-          width="128"
-          height="128"
-          viewBox="0 0 128 128"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="128" height="128" fill="#fff6ec" />
-          <g stroke="#000" strokeWidth="4" fill="none">
-            <path
-              d="M20 40 h40 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-8 l-12 10 v-10 h-20 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10 z"
-              fill="#ffffff"
-            />
-            <circle cx="35" cy="60" r="3" fill="#000" />
-            <circle cx="45" cy="60" r="3" fill="#000" />
-            <circle cx="55" cy="60" r="3" fill="#000" />
-          </g>
-          <g stroke="#000" strokeWidth="4" fill="#a0a0a0">
-            <rect x="70" y="40" width="40" height="30" rx="4" ry="4" />
-            <polygon
-              points="110,45 125,55 110,65"
-              fill="#e3e3e3"
-              stroke="#000"
-            />
-          </g>
-        </svg>
+            width="128"
+            height="128"
+            viewBox="0 0 128 128"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="64" cy="64" r="64" fill=" #25D366" />
+            <g stroke="#000" strokeWidth="4" fill="none">
+              <path
+                d="M20 40 h40 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-8 l-12 10 v-10 h-20 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10 z"
+                fill="#ffffff"
+              />
+              <circle cx="35" cy="60" r="3" fill="#000" />
+              <circle cx="45" cy="60" r="3" fill="#000" />
+              <circle cx="55" cy="60" r="3" fill="#000" />
+            </g>
+            <g stroke="#000" strokeWidth="4" fill="#a0a0a0">
+              <rect x="70" y="40" width="40" height="30" rx="4" ry="4" />
+              <polygon
+                points="110,45 125,55 110,65"
+                fill="#e3e3e3"
+                stroke="#000"
+              />
+            </g>
+          </svg>
       </div>
     </div>
   );

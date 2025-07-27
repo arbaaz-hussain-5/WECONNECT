@@ -1,4 +1,3 @@
-
 :root {
   --blue: #34B7F1;
   --white: #ffffff;
@@ -11,14 +10,13 @@
 .sscon {
   width: 45vw;
   height: calc((var(--fsize) * 30) - var(--fsize) * 25/7.25);
-   display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  background-color:  #000000;
-  overflow:scroll;
+  background-color: #ffffff;
+  overflow: scroll;
   scrollbar-width: none;
-  gap: calc(var(--fsize) * 0.3); 
-  border:  calc(var(--fsize) * 0.1) solid  #34B7F1;
+  gap: calc(var(--fsize) * 0.3);
   padding: calc(var(--fsize) * 0.5) 0;
 
 
@@ -34,30 +32,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-   border:  calc(var(--fsize) * 0.1) solid  #34B7F1;
+
 }
 
 .serch_cont {
- 
+
   width: 80%;
   height: calc(var(--fsize) * 3);
-  background-color: #000000;
-  color: white;
-  border:  calc(var(--fsize) * 0.1) solid #db4d4d;
+  background-color: #25D366;
+  color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 calc(var(--fsize) * 1.25);
   font-size: calc(var(--fsize) * 1);
+  font-weight: 18000;
 
 
 
 }
 
 .serch_cont>img {
-   height: 90%;
-   border-radius:calc(var(--fsize) * 2.7);
-    width: auto; 
+  height: 90%;
+  border-radius: calc(var(--fsize) * 2.7);
+  width: auto;
 
 }
 
@@ -68,13 +66,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-    
+  
+
 }
 
 .serhead>span {
-   border:  calc(var(--fsize) * 0.1) solid   rgb(101, 181, 95);
   font-size: calc(var(--fsize) * 1.25);
-  padding: 0 calc(var(--fsize) * 1.25);
-  border-radius:calc(var(--fsize) * 1) ;
+  padding: calc(var(--fsize) * 0.2) calc(var(--fsize) * 1.25);
+  border-radius: calc(var(--fsize) * 1.5);
   color: white;
+  background-color: #34B7F1;
 }

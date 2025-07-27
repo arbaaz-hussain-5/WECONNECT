@@ -1,75 +1,102 @@
+:root {
+  --blue: #34B7F1;
+  --white: #ffffff;
 
 
+  --fsize: calc(100vw/80);
+  --vgap: calc(100vw/200)
+}
 
-.notification{
-    width: 65vw;
-    height: 100vh;
-    background-color:#fff6ec;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
+
+.notification {
+ 
+  width: 65vw;
+  height: 100vh;
+  background-color: #eddfde;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   gap:calc(var(--fsize) * 0.1);
+
 }
-.NotElement{
-    width: 60%;
-    height: 10%;
-    background-color: #838996;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7px;
+
+.NotElement {
+  width: 60%;
+  height: calc(var(--fsize) * 3.5);
+  background-color: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ 
+
 }
-.NotElement >div > img{
-    height: 100%;
-    width: auto;
-    margin-right: 25px;
+
+.NotElement>div>img {
+  height: calc(var(--fsize) * 3.25);
+  width: calc(var(--fsize) * 3.25);
+  border-radius:calc(var(--fsize) * 3.25);
 }
-.NotElement >div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    height: 100%;
+
+.NotElement>div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--fsize) * 3.5);
+  font-size: calc(var(--fsize) * 0.8);
+  width: 15vw;
+  gap:calc(var(--fsize) * 0.5);
+  font-weight: 9000;
 }
-.NotElement >div> button{
-    height: 60%;
-    padding: 4px 10px;
-    background-color: pink;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+
+.NotElement>div>button {
+  height: calc(var(--fsize) * 3.5 * 0.6);
+  width: 6vw;
+  background-color:  #34B7F1;
+  border: none;
+  cursor: pointer;
+  font-size: calc(var(--fsize) * 0.8);
+  border-radius:calc(var(--fsize) * 0.5);
+  font-weight: 9000;
 }
-.notf_page{
+
+.notf_page {
   height: 100vh;
   width: 100vw;
   display: flex;
 
 }
-.notfi_side{
+
+.notfi_side {
   width: 35vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:  #838996;
+  background-color: rgb(78, 48, 48);
 }
-.notfi_side > svg {
+
+.notfi_side>svg {
   height: 25vw;
   width: 25vw;
   border-radius: 25vw;
 }
 
 .nothead {
-  padding: 5px;
+  height: calc(var(--fsize) * 3.5 * 0.7);
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 2px solid #838996;
+  border-bottom: 2px solid #000000;
+   margin-bottom: calc(var(--fsize) * 0.5);
 }
 
-.nothead > span{
-  background-color: pink;
-  padding: 10px 20px;
-  border-radius: 10px;
+.nothead>span {
+  background-color: rgb(78, 48, 48);
+  font-size: calc(var(--fsize) * 1);
+  padding:calc(var(--fsize) * 0.3) calc(var(--fsize) * 0.6); ; 
+  border-radius:calc(var(--fsize) * 1) ;
+  color: white;
+  font-weight: 9000;
+
 }

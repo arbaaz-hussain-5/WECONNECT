@@ -10,7 +10,7 @@
 .message_board_none {
     width: 75vw;
     height: 100vh;
-    background-color: #000000;
+    background-color: rgb(78, 48, 48);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,7 +26,7 @@
 .message_board {
     width: 75vw;
     height: 100vh;
-    background-color: #000000;
+    background-color:rgb(78, 48, 48);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,11 +73,11 @@
     border: none;
     width: 70%;
     border-radius: calc(var(--fsize)*2.5) 0 0 calc(var(--fsize)*2.5);
-    background-color: black;
-    border:calc(var(--fsize)*0.1) solid #db4d4d;
-    color: white;
+    background-color: rgba(255, 255, 255);;
+    color: rgb(0, 0, 0);
     padding: 0 calc(var(--fsize)*1);
     font-size:calc(var(--fsize)*1);
+    font-weight: 9000;
        
     
 }
@@ -90,7 +90,7 @@
 
     height: calc(var(--fsize)*2.5);
     width: calc(var(--fsize)*4);
-    background-color:#34B7F1;
+    background-color : #000000;
     color: white;
     border: none;
     border-radius: 0 calc(var(--fsize)*2.5) calc(var(--fsize)*2.5) 0;
@@ -98,6 +98,7 @@
     align-items: center;
     justify-content: center;
     font-size:calc(var(--fsize)*1);
+    font-weight: 1200;
 
 
 }
@@ -149,6 +150,7 @@
 
 
 .chat_not_bar {
+     margin-top:calc(var(--fsize)*0.1) ;
     height: calc(var(--fsize)*3);
     width: 99%;
     background-color: #25D366;
@@ -256,3 +258,5 @@
     border-radius: 35px;
 
 }
+
+
