@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./ContactBar.css";
 
 function ContactBar({
@@ -12,6 +12,7 @@ function ContactBar({
   receiver_id,
   online_users,
   setSerCon,
+  socket,
 }) {
   return (
     <div className="contac_menu">
@@ -36,6 +37,7 @@ function ContactBar({
         {Object.keys(online_users).map((o_user) => {
           return (
             <Contact
+              socket={socket}
               setOpen_receive_window={setOpen_receive_window}
               setOpen_call_window={setOpen_call_window}
               key={o_user}
@@ -68,12 +70,36 @@ function Contact({
   current_receiver,
   conl_user,
   pic,
+  socket,
 }) {
   const [re_id, setRe_id] = useState(r_id);
+  const [is_typing, setIs_typing] = useState(false);
+  const is_typing_time = useRef(null);
+  useEffect(() => {
+    socket.on(
+      "receive_is_typing",
+      (sender_id) => {
+        if (re_id == sender_id) {
+          setIs_typing(true);
+          if (!is_typing_time.current) {
+            is_typing_time.current = setTimeout(() => {
+              setIs_typing(false);
+            }, 1500);
+          } else {
+            clearTimeout(is_typing_time.current);
+            is_typing_time.current = setTimeout(() => {
+              setIs_typing(false);
+            }, 1500);
+          }
+        }
+      },
+      [re_id]
+    );
+  });
   return (
     <div
       className="contact"
-      style={current_receiver === re_id ? { backgroundColor:"#34B7F1" } : {}}
+      style={current_receiver === re_id ? { backgroundColor: "#34B7F1" } : {}}
       onClick={() => {
         set_Receiver_id(re_id);
         console.log(re_id);
@@ -86,8 +112,11 @@ function Contact({
       <img src={pic} />
       <span style={current_receiver === re_id ? { color: "black" } : {}}>
         {current_user !== re_id ? re_id : "you"}
-        <span className="is_online">
-          {conl_user.includes(re_id) ? "online" : null}
+        <span>
+          <span className="is_online">
+            {conl_user.includes(re_id) && !is_typing ? "online" : null}
+          </span>
+          <span className="is_typing"> {is_typing ? "typing....." : null}</span>
         </span>
       </span>
     </div>

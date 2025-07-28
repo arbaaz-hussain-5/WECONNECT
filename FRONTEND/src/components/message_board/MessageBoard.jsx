@@ -1,5 +1,5 @@
 import "./MessageBoard.css";
-import { useState, useContext, useEffect } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import { makeCall } from "../../utils/web_rtc/web_rtc_server.js";
 import VideoCall from "../video_call/VideoCall.jsx";
 import { isVideo } from "../../contexts/VideoPlayer.jsx";
@@ -17,7 +17,9 @@ function MessageBoard({
   const [current_message, setCurrent_message] = useState("");
   const [pic, setPic] = useState(null);
   const VideoStream = useContext(isVideo);
+  const chatRef = useRef(null);
   let user = sessionStorage.getItem("current_user");
+  const typingCheckId = useRef(null);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/get_profile_pic`, {
       method: "POST",
@@ -33,6 +35,12 @@ function MessageBoard({
       });
   }, [user, receiver_id]);
 
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  });
+
   if (open_receive_window) {
     return <VideoCall />;
   }
@@ -45,31 +53,31 @@ function MessageBoard({
     return (
       <div className="message_board_none">
         {" "}
-      <svg
-            width="128"
-            height="128"
-            viewBox="0 0 128 128"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="64" cy="64" r="64" fill=" #25D366" />
-            <g stroke="#000" strokeWidth="4" fill="none">
-              <path
-                d="M20 40 h40 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-8 l-12 10 v-10 h-20 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10 z"
-                fill="#ffffff"
-              />
-              <circle cx="35" cy="60" r="3" fill="#000" />
-              <circle cx="45" cy="60" r="3" fill="#000" />
-              <circle cx="55" cy="60" r="3" fill="#000" />
-            </g>
-            <g stroke="#000" strokeWidth="4" fill="#a0a0a0">
-              <rect x="70" y="40" width="40" height="30" rx="4" ry="4" />
-              <polygon
-                points="110,45 125,55 110,65"
-                fill="#e3e3e3"
-                stroke="#000"
-              />
-            </g>
-          </svg>
+        <svg
+          width="128"
+          height="128"
+          viewBox="0 0 128 128"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="64" cy="64" r="64" fill=" #25D366" />
+          <g stroke="#000" strokeWidth="4" fill="none">
+            <path
+              d="M20 40 h40 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-8 l-12 10 v-10 h-20 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10 z"
+              fill="#ffffff"
+            />
+            <circle cx="35" cy="60" r="3" fill="#000" />
+            <circle cx="45" cy="60" r="3" fill="#000" />
+            <circle cx="55" cy="60" r="3" fill="#000" />
+          </g>
+          <g stroke="#000" strokeWidth="4" fill="#a0a0a0">
+            <rect x="70" y="40" width="40" height="30" rx="4" ry="4" />
+            <polygon
+              points="110,45 125,55 110,65"
+              fill="#e3e3e3"
+              stroke="#000"
+            />
+          </g>
+        </svg>
       </div>
     );
   }
@@ -83,7 +91,7 @@ function MessageBoard({
         VideoStream={VideoStream}
         socket={socket}
       />
-      <div className="chat_messages">
+      <div className="chat_messages" ref={chatRef}>
         {history.current.map((msg, index) => {
           if (msg[2] == receiver_id) {
             return (
@@ -101,6 +109,18 @@ function MessageBoard({
           type="text"
           onChange={(event) => {
             setCurrent_message(event.target.value);
+             socket.emit("send_is_typing", receiver_id)
+            console.log("typing")
+            if (typingCheckId.current) {
+              clearTimeout(typingCheckId.current);
+              typingCheckId.current = setTimeout(function () {
+                console.log("typing Stoped");
+              }, 5000);
+            } else {
+              typingCheckId.current = setTimeout(function () {
+                console.log("typing Stoped");
+              }, 5000);
+            }
           }}
         />
         <button

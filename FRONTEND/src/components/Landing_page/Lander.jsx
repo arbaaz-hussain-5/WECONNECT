@@ -5,8 +5,8 @@ function Lander() {
     <div className="no_nav">
       <div className="lander">
         <div className="s0">
-          <h1>WELCOME TO CHATLINE</h1>
-          <h2>An instant secure text messinging App</h2>
+          <h1>WELCOME TO WECONNECT</h1>
+          <h2>An instant secure Connecting App</h2>
         </div>
         <div className="lline"></div>
         <div className="s1">
@@ -66,7 +66,7 @@ function Lander() {
           <h4>Talk Anywhere</h4>
           <p>
             Make crystal-clear voice calls over the internet using advanced VoIP
-            technology. Fast, secure, and completely free*—no matter where you
+            technology. Fast, secure, and completely free, no matter where you
             are.
           </p>
         </div>
@@ -78,7 +78,7 @@ function Lander() {
           <h4>Face-to-Face, Anywhere</h4>
           <p>
             Connect in real time with smooth, high-quality video powered by
-            WebRTC. No downloads, no hassle—just private, secure video calls
+            WebRTC. No downloads, no hassle, just private, secure video calls
             from your browser or app.
           </p>
         </div>
@@ -100,9 +100,9 @@ function Lander() {
 
       <div className="footer-container">
         <div>
-          <h2 className="footer-title">CHATLINE — Private, Fast & Simple</h2>
+          <h2 className="footer-title">WECONNNECT— Private, Fast & Simple</h2>
           <p className="footer-description">
-            Welcome to CHATLINE — the all-in-one platform for messaging, voice
+            Welcome to WECONNNECT — the all-in-one platform for messaging, voice
             and video calls. We prioritize privacy with industry-grade
             end-to-end encryption while offering a fast and elegant user
             experience.
@@ -139,7 +139,7 @@ function Lander() {
           v1.0.0 &nbsp;|&nbsp; Language: English (India)
         </div>
         <div className="footer-copy">
-          © 2025 CHATLINE Inc. All rights reserved.
+          © 2025 WECONNNECTInc. All rights reserved.
         </div>
       </div>
     </div>

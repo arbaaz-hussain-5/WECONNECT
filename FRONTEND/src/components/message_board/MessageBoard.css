@@ -26,7 +26,7 @@
 .message_board {
     width: 75vw;
     height: 100vh;
-    background-color:rgb(78, 48, 48);
+    background-color:rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,14 +50,18 @@
 .chat_messages {
     display: flex;
     flex-direction: column;
-    height: 90%;
+    height: 70%;
     width: 100%;
     overflow: auto;
     overflow: auto;
     scrollbar-width: none;
+    
+  
+   
 }
 
 .Write_message {
+    margin-top: calc(var(--fsize)*3.25);
     height: calc(var(--fsize)*3);
     width: 99%;
     display: flex;
@@ -65,7 +69,8 @@
     justify-content: center;
     align-items: center;
     gap: calc(var(--fsize)*0.2);
-    margin-bottom: calc(var(--fsize)*1.25);
+    
+    
 }
 
 .Write_message>input {
@@ -73,8 +78,8 @@
     border: none;
     width: 70%;
     border-radius: calc(var(--fsize)*2.5) 0 0 calc(var(--fsize)*2.5);
-    background-color: rgba(255, 255, 255);;
-    color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0,0.5);;
+    color: rgb(255, 255, 255);
     padding: 0 calc(var(--fsize)*1);
     font-size:calc(var(--fsize)*1);
     font-weight: 9000;
@@ -129,7 +134,7 @@
 
 
 .send_message_incomming>div {
-    background-color: #34B7F1;
+    background-color: #db4d4dd0;
     color: white;
     font-size: var(--fsize);
     border-radius: var(--fsize);
@@ -140,7 +145,7 @@
 
 .send_message_outgoing>div {
     max-width: 45%;
-    background-color: #34B7F1;
+    background-color: #34b8f1d0;
     color: white;
     font-size: var(--fsize);
     border-radius: var(--fsize);

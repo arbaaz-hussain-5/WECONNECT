@@ -73,6 +73,13 @@ export default function socketServer(server) {
         online_users.get(reciever_id).emit("recieve_message", message, user_id);
       }
     });
+    user_socket.on("send_is_typing", (reciever_id) => {
+      console.log(user_id + " is typing to " + reciever_id)
+      if (online_users.has(reciever_id)) {
+        online_users.get(reciever_id).emit("receive_is_typing", user_id);
+      }
+    })
+
     user_socket.on("send_message_rtc", (message, receiver) => {
       console.log(online_users.keys())
       console.log(user_id + " wants to video call " + receiver)

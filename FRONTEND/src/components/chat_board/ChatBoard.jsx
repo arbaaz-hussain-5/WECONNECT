@@ -17,6 +17,7 @@ function ChatBoard({ current_user }) {
   const [searCon, setSerCon] = useState(false);
   const [search_data, setSearch_data] = useState("");
   const [conl_user, setConl_user] = useState([]);
+  const [cistyping_user, SetCistyping_user] = useState([]);
   const [is_calling, setIs_calling] = useState(false);
   const [open_receive_window, setOpen_receive_window] = useState(false);
   const [open_call_window, setOpen_call_window] = useState(false);
@@ -24,6 +25,7 @@ function ChatBoard({ current_user }) {
   const currernt_ice = useRef([]);
   const currernt_offer = useRef(null);
   const currernt_caller = useRef(null);
+
   useEffect(() => {
     const socket = io(import.meta.env.VITE_SOCKET_SERVER, {
       extraHeaders: {
@@ -145,6 +147,7 @@ function ChatBoard({ current_user }) {
         conl_user={conl_user}
         setOpen_call_window={setOpen_call_window}
         setOpen_receive_window={setOpen_receive_window}
+        socket={user_socket.current}
       />
       <MessageBoard
         send_message={send_message}

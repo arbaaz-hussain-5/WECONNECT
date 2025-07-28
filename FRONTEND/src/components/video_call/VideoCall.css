@@ -41,7 +41,7 @@ h6 {
 .video_call {
   width: 75vw;
   min-height: 100vh;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: space-evenly;
 align-items: center;
@@ -58,10 +58,34 @@ align-items: center;
   align-items: center;
   justify-content: center;
   position: relative;
-  border: calc(var( --fsize) *0.1) solid  #34B7F1;
-
-
+  
 }
+
+.cont_receiver{
+  position: absolute;
+  width: 100%;
+ height: calc(var( --fsize) *4);
+  bottom: 0;
+  background-color:transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.cont_receiver > div {
+  height: calc(var( --fsize) *3.5);
+  width: calc(var( --fsize) *3.5);
+  background-color: rgba(255, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:calc(var( --fsize) *3.5); 
+}
+
+.cont_receiver > div > svg {
+  height: calc(var( --fsize) *2);
+  width: calc(var( --fsize) *2);
+}
+
 
 .receiver > video {
   width: 100%;
@@ -91,26 +115,44 @@ height: calc(var( --fsize) *20);
       display: flex;
   align-items: center;
   justify-content: center;
-  border: calc(var( --fsize) *0.1) solid  #34B7F1;
+  position: relative;
+  
 
 }
-.vid_fit_screen{
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cont_sender{
   position: absolute;
-  background-color: black;
-   display: flex;
+  width: 100%;
+ height: calc(var( --fsize) *4);
+  bottom: 0;
+  background-color:transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.cont_sender> div {
+  height: calc(var( --fsize) *3.5);
+  width: calc(var( --fsize) *3.5);
+  background-color: rgba(255, 0, 0, 0.6);
+  display: flex;
   align-items: center;
   justify-content: center;
-   height: calc(var( --fsize) *3.5);
-  width:  calc(var( --fsize) *3.5);
-  border-radius: calc(var( --fsize) *2);  
+  border-radius:calc(var( --fsize) *3.5); 
 }
 
-
-.vid_fit_screen > svg{
- 
+.cont_sender > div > svg {
   height: calc(var( --fsize) *2);
-  width:  calc(var( --fsize) *2);
-  stroke: green;
+  width: calc(var( --fsize) *2);
 }
-
-
