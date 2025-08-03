@@ -82,7 +82,7 @@
 }
 
 .nothead {
-  height: calc(var(--fsize) * 3.5 * 0.7);
+  height: calc(var(--fsize) * 3.5 * 1);
   width: 100%;
   display: flex;
   align-items: center;

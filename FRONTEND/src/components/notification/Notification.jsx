@@ -25,13 +25,16 @@ function Notification() {
       }
     });
   }, [id]);
+  
 
   return (
     <div className="notf_page">
       <div className="notification">
+        
         <div className="nothead">
           <span>NOTIFICATIONS</span>
         </div>
+        {(not_his.length === 0)?<div style={{width:"100%", height: "100%", display:"flex", alignItems : "center", justifyContent : "center", color: "rgb(78, 48, 48)"}}><h1>NO NOTIFICATIONS</h1></div>:null}
         {not_his.map((data, index) => {
           if (data[0] == "arrived") {
             return (

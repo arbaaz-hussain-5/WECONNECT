@@ -109,8 +109,8 @@ function MessageBoard({
           type="text"
           onChange={(event) => {
             setCurrent_message(event.target.value);
-             socket.emit("send_is_typing", receiver_id)
-            console.log("typing")
+            socket.emit("send_is_typing", receiver_id);
+            console.log("typing");
             if (typingCheckId.current) {
               clearTimeout(typingCheckId.current);
               typingCheckId.current = setTimeout(function () {
@@ -154,10 +154,14 @@ function ChatNOTBAR({
       <div className="call">
         <div
           className="videocall"
-          onClick={() => {
+          onClick={async () => {
             setOpen_call_window(true);
-
-            makeCall(VideoStream, socket, receiver_id);
+            console.log("making return");
+            VideoStream.remove_video = await makeCall(
+              VideoStream,
+              socket,
+              receiver_id
+            );
           }}
         >
           <svg

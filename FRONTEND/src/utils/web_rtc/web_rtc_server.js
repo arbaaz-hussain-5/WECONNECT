@@ -5,7 +5,7 @@ export async function makeCall(VideoStream, socket, receiver) {
     }
     const localStream = await openMediaDevices({
         'video': true,
-        'audio':true
+        'audio': true
     });
     console.log("got local mediastream object");
     console.log(localStream)
@@ -50,12 +50,14 @@ export async function makeCall(VideoStream, socket, receiver) {
         }
     });
 
+    let vs = null;
+
     try {
         console.log("local media stream track is adder befor connection");
         console.log(track[0]);
         console.log(track[1]);
         peerConnection.addTrack(track[0], localStream)
-        peerConnection.addTrack(track[1], localStream)
+        vs = peerConnection.addTrack(track[1], localStream)
 
     } catch (error) {
         console.error('Error accessing media devices.', error);
@@ -71,6 +73,18 @@ export async function makeCall(VideoStream, socket, receiver) {
     socket.emit("send_message_rtc", { 'offer': offer }, receiver)
     console.log("sending offer object to remote peer")
     console.log(offer)
+
+
+
+    return (() => {
+        peerConnection.removeTrack(vs)
+        alert("removeeed")
+    })
+
+
+
+
+
 }
 
 export async function receiveCall(VideoStream, socket, message, ice_list, sender) {
@@ -81,12 +95,13 @@ export async function receiveCall(VideoStream, socket, message, ice_list, sender
     }
     const localStream = await openMediaDevices({
         'video': true,
-        'audio':true
+        'audio': true
     });
-
+    console.log("got local mediastream object");
+    console.log(localStream)
     VideoStream.current_stream = localStream
     const track = localStream.getTracks()
-    console.log("zzzzzzzzzzzzzzzzzzzz")
+    console.log("got local mediastream tracks array");
     console.log(track)
     VideoStream.video_elm_local.current.srcObject = localStream
 
@@ -94,6 +109,7 @@ export async function receiveCall(VideoStream, socket, message, ice_list, sender
     let peerConnection = new RTCPeerConnection(configuration);
     peerConnection.addTrack(track[0], localStream)
     peerConnection.addTrack(track[1], localStream)
+    console.log("local media stream track is added befor connection");
     peerConnection.setRemoteDescription(new RTCSessionDescription(message.offer));
 
     peerConnection.addEventListener('track', async (event) => {
@@ -127,7 +143,7 @@ export async function receiveCall(VideoStream, socket, message, ice_list, sender
         }
     });
 
-    
+
 
     peerConnection.createDataChannel('test')
     const answer = await peerConnection.createAnswer();
@@ -136,4 +152,7 @@ export async function receiveCall(VideoStream, socket, message, ice_list, sender
     console.log("sending answer object to remote peer")
 
 
+}
+function endCall(peerConnection) {
+    peerConnection.close()
 }
