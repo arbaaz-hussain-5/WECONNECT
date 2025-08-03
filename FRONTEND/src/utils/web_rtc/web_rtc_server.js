@@ -19,6 +19,10 @@ export async function makeCall(VideoStream, socket, receiver) {
         console.log(event.streams);
         VideoStream.video_elm_remote.current.srcObject = event.streams[0]
     });
+    peerConnection.addEventListener("negotiationneeded", (event) => {
+         console.log("re collecting icecandidate of local peer and dispatching to remote peer")
+
+     })
     peerConnection.addEventListener('connectionstatechange', (event) => {
         if (peerConnection.connectionState === 'connected') {
             console.log("connection is estabilished")
@@ -76,10 +80,16 @@ export async function makeCall(VideoStream, socket, receiver) {
 
 
 
-    return (() => {
+    VideoStream.remove_video = () => {
         peerConnection.removeTrack(vs)
         alert("removeeed")
-    })
+    }
+
+    VideoStream.add_video = () => {
+        peerConnection.addTrack(track[1], localStream)
+        alert("added")
+
+    }
 
 
 

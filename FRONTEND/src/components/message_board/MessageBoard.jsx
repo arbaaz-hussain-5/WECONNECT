@@ -157,11 +157,7 @@ function ChatNOTBAR({
           onClick={async () => {
             setOpen_call_window(true);
             console.log("making return");
-            VideoStream.remove_video = await makeCall(
-              VideoStream,
-              socket,
-              receiver_id
-            );
+            makeCall(VideoStream, socket, receiver_id);
           }}
         >
           <svg
