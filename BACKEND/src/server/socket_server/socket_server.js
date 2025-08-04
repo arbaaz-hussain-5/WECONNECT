@@ -10,6 +10,7 @@ export default function socketServer(server) {
   });
 
   const online_users = new Map();
+  const online_call_users = new Map();
   io_server.on("connection", async (user_socket) => {
     const data_base = (connectBase()).db("CHAT-BASE");
     const users = data_base.collection("users");

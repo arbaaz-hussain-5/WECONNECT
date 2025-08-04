@@ -1,5 +1,6 @@
 
 export async function makeCall(VideoStream, socket, receiver) {
+    const ice_candidate_list = []
     const openMediaDevices = async (constraints) => {
         return await navigator.mediaDevices.getUserMedia(constraints);
     }
@@ -19,19 +20,25 @@ export async function makeCall(VideoStream, socket, receiver) {
         console.log(event.streams);
         VideoStream.video_elm_remote.current.srcObject = event.streams[0]
     });
-    peerConnection.addEventListener("negotiationneeded", (event) => {
+    peerConnection.addEventListener("negotiationneeded", () => {
         console.log("re collecting icecandidate of local peer and dispatching to remote peer")
 
     })
-    peerConnection.addEventListener('connectionstatechange', (event) => {
+    peerConnection.addEventListener('connectionstatechange', () => {
         if (peerConnection.connectionState === 'connected') {
             console.log("connection is estabilished")
         }
     });
     peerConnection.addEventListener('icecandidate', async (event) => {
         if (event.candidate) {
+            ice_candidate_list.push(event.candidate)
             console.log("collecting icecandidate of local peer and dispatching to remote peer")
-            socket.emit("send_message_rtc", { 'icecandidate': event.candidate }, receiver);
+            // socket.emit("send_message_rtc", { 'icecandidate': event.candidate }, receiver);
+        }
+        else {
+            console.log("overrrrrrrrrrrrrrr")
+            console.log(ice_candidate_list)
+            socket.emit("send_message_rtc", { 'icecandidate': ice_candidate_list }, receiver);
         }
     });
     socket.on('receive_message_rtc', async (message, sender) => {
@@ -57,7 +64,7 @@ export async function makeCall(VideoStream, socket, receiver) {
     let vs = null;
 
     try {
-        console.log("local media stream track is adder befor connection");
+        console.log("local media stream track is added befor connection");
         console.log(track[0]);
         console.log(track[1]);
         peerConnection.addTrack(track[0], localStream)
@@ -97,11 +104,6 @@ export async function makeCall(VideoStream, socket, receiver) {
         alert("addes")
 
     }
-
-
-
-
-
 }
 
 export async function receiveCall(VideoStream, socket, message, ice_list, sender) {

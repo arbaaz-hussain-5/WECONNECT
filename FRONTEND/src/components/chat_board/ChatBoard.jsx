@@ -55,7 +55,7 @@ function ChatBoard({ current_user }) {
       }
       if (message.icecandidate) {
         console.log("getting cids");
-        currernt_ice.current.push(message.icecandidate);
+        currernt_ice.current = message.icecandidate;
         console.log(currernt_ice.current);
       }
     });

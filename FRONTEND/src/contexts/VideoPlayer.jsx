@@ -6,5 +6,6 @@ const inital_state = {
   current_remote_stream: null,
   remove_video: null,
   add_video: null,
+  is_on_call: false
 };
 export const isVideo = createContext(inital_state);
