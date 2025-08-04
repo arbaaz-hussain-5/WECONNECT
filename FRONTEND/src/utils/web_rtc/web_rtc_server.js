@@ -87,10 +87,14 @@ export async function makeCall(VideoStream, socket, receiver) {
 
     }
 
-    VideoStream.add_video = () => {
-        peerConnection.addTrack(track[1], localStream)
+    VideoStream.add_video = async () => {
+        vs = peerConnection.addTrack(track[1], localStream)
         console.log(peerConnection.getSenders())
-          alert("addes")
+        const offer = await peerConnection.createOffer();
+        await peerConnection.setLocalDescription(offer);
+        socket.emit("send_message_rtc", { 'offer': offer }, receiver)
+        console.log("sending offer object to remote peer")
+        alert("addes")
 
     }
 
