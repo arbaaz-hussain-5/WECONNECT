@@ -32,12 +32,14 @@ export async function makeCall(VideoStream, socket, receiver) {
     peerConnection.addEventListener('icecandidate', async (event) => {
         if (event.candidate) {
             ice_candidate_list.push(event.candidate)
+
             console.log("collecting icecandidate of local peer and dispatching to remote peer")
             // socket.emit("send_message_rtc", { 'icecandidate': event.candidate }, receiver);
         }
         else {
             console.log("overrrrrrrrrrrrrrr")
             console.log(ice_candidate_list)
+            peerConnection.restartIce();
             socket.emit("send_message_rtc", { 'icecandidate': ice_candidate_list }, receiver);
         }
     });
