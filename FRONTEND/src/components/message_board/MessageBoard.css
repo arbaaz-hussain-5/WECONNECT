@@ -10,7 +10,7 @@
 .message_board_none {
     width: 75vw;
     height: 100vh;
-    background-color: rgb(78, 48, 48);
+    background-color: rgba(255, 255, 255, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;

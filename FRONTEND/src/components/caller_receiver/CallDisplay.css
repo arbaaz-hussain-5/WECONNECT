@@ -1,14 +1,16 @@
 .call_display{
-    width:30vw;
-    height:20vh;
-    background-color: black;
+    width:55vw;
+    height:calc(1vw * 5);
+    background-color: rgb(0, 0, 0, 0.8);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 4.5vw;
+    border-radius: 7vw;
 }
 .call_accept{
-    width: 5vw;
-    height: 5vw;
+    width: 4vw;
+    height: 4vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,8 +19,8 @@
     
 }
 .call_reject{
-    width: 5vw;
-    height: 5vw;
+    width: 4vw;
+    height: 4vw;
     background-color: red;
       display: flex;
     align-items: center;
@@ -27,6 +29,6 @@
 }
 
 .call_display svg {
-    height: 3vw;
-    width: 3vw;
+    height: 2vw;
+    width: 2vw;
 }
