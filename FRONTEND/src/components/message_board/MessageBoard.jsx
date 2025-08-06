@@ -16,6 +16,7 @@ function MessageBoard({
 }) {
   const [current_message, setCurrent_message] = useState("");
   const [pic, setPic] = useState(null);
+  const [v_fscreen, setV_fscreen] = useState(false);
   const VideoStream = useContext(isVideo);
   const chatRef = useRef(null);
   let user = sessionStorage.getItem("current_user");
