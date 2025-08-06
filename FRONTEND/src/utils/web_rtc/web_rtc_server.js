@@ -90,17 +90,33 @@ export async function makeCall(VideoStream, socket, receiver) {
 
 
     VideoStream.remove_video = async () => {
-         track[1].enabled = false;
-        // peerConnection.removeTrack(vs)
-        // console.log(peerConnection.getSenders())
-        // alert("removed")
+        track[1].enabled = false;
 
     }
 
     VideoStream.add_video = async () => {
-     track[1].enabled = true;
+        track[1].enabled = true;
 
     }
+
+     VideoStream.remove_video = async () => {
+        track[1].enabled = false;
+
+    }
+
+    VideoStream.add_audio = async () => {
+        track[0].enabled = true;
+
+    }
+
+      VideoStream.remove_audio = async () => {
+        track[0].enabled = false;
+
+    }
+
+    
+
+    
 }
 
 export async function receiveCall(VideoStream, socket, message, ice_list, sender) {
