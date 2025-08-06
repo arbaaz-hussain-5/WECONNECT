@@ -99,24 +99,20 @@ export async function makeCall(VideoStream, socket, receiver) {
 
     }
 
-     VideoStream.remove_video = async () => {
-        track[1].enabled = false;
-
-    }
 
     VideoStream.add_audio = async () => {
         track[0].enabled = true;
 
     }
 
-      VideoStream.remove_audio = async () => {
+    VideoStream.remove_audio = async () => {
         track[0].enabled = false;
 
     }
 
-    
 
-    
+
+
 }
 
 export async function receiveCall(VideoStream, socket, message, ice_list, sender) {
@@ -182,6 +178,29 @@ export async function receiveCall(VideoStream, socket, message, ice_list, sender
     await peerConnection.setLocalDescription(answer);
     socket.emit("send_message_rtc", { 'answer': answer }, sender)
     console.log("sending answer object to remote peer")
+
+
+
+    VideoStream.remove_video = async () => {
+        track[1].enabled = false;
+
+    }
+
+    VideoStream.add_video = async () => {
+        track[1].enabled = true;
+
+    }
+
+
+    VideoStream.add_audio = async () => {
+        track[0].enabled = true;
+
+    }
+
+    VideoStream.remove_audio = async () => {
+        track[0].enabled = false;
+
+    }
 
 
 }
