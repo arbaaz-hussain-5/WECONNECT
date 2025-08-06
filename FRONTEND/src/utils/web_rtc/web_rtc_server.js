@@ -90,20 +90,15 @@ export async function makeCall(VideoStream, socket, receiver) {
 
 
     VideoStream.remove_video = async () => {
-        peerConnection.removeTrack(vs)
-        console.log(peerConnection.getSenders())
-        alert("removed")
+         track[1].enabled = false;
+        // peerConnection.removeTrack(vs)
+        // console.log(peerConnection.getSenders())
+        // alert("removed")
 
     }
 
     VideoStream.add_video = async () => {
-        vs = peerConnection.addTrack(track[1], localStream)
-        console.log(peerConnection.getSenders())
-        const offer = await peerConnection.createOffer();
-        await peerConnection.setLocalDescription(offer);
-        socket.emit("send_message_rtc", { 'offer': offer }, receiver)
-        console.log("sending offer object to remote peer")
-        alert("addes")
+     track[1].enabled = true;
 
     }
 }
